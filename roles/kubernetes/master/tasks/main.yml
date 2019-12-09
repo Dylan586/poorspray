@@ -1,0 +1,25 @@
+---
+# tasks file for roles/kubernetes/master
+#
+
+- name: reset the cluster
+  shell: kubeadm reset -f
+
+- name: initialize the cluster
+  shell: kubeadm init --apiserver-advertise-address={{ hostvars[groups['kube-master'][0]].ansible_host }} --skip-phases addon/kube-proxy --pod-network-cidr {{ pod_network_cidr }} --service-cidr {{ service_cidr }}
+  args:
+    chdir: $HOME
+
+- name: create .kube directory
+  file:
+    path: $HOME/.kube
+    state: directory
+    mode: 0755
+
+- name: copy admin.conf to user's kube config
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /root/.kube/config
+    remote_src: yes
+    owner: root
+

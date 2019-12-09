@@ -1,0 +1,29 @@
+#roles/<role>/task/main
+#-install
+#-config
+#-triger handlers
+#roles/defaults/main
+#- many vars - use namespace. i.e. role_varname
+
+---
+- hosts: all
+  gather_facts: false
+  roles: 
+    - role: kubernetes/host-common
+  tags: install-stuff
+
+- hosts: kube-master
+  gather_facts: false
+  roles: 
+    - role: kubernetes/master
+      vars: 
+        pod_network_cidr: 192.168.0.0/16
+        service_cidr: 10.90.0.0/16
+  tags: set-master
+
+- hosts: kube-node
+  gather_facts: false
+  roles: 
+    - role: kubernetes/node
+  tags: set-nodes
+
