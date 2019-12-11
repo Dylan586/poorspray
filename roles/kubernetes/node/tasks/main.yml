@@ -17,9 +17,10 @@
 - name: reset node
   shell: kubeadm reset -f
 
-- name: join cluster
+- name: join cluster 
   #shell: "{{ hostvars[groups['kube-master'][0]].join_command }}"
   shell: "{{ join_command }}"
   args:
     chdir: $HOME
+
 

@@ -4,6 +4,7 @@
 
 - name: reset the cluster
   shell: kubeadm reset -f
+  tags: reset-master
 
 - name: initialize the cluster
   shell: kubeadm init --apiserver-advertise-address={{ hostvars[groups['kube-master'][0]].ansible_host }} --skip-phases addon/kube-proxy --pod-network-cidr {{ pod_network_cidr }} --service-cidr {{ service_cidr }}

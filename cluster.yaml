@@ -10,7 +10,11 @@
   gather_facts: false
   roles: 
     - role: kubernetes/host-common
+      vars:
+        kubernetes_version: 1.16.3-00
+        nv_ovs_curl: curl -s https://2d0158bd54acb8195b4b8cc465e2ad839865f45dd45efcd5:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-12-0/script.deb.sh | bash
   tags: install-stuff
+
 
 - hosts: kube-master
   gather_facts: false
