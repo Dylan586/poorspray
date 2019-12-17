@@ -31,3 +31,24 @@
     - role: kubernetes/node
   tags: set-nodes
 
+
+- hosts: kube-node
+  tasks:
+  - name: Network | Zeroize SRIOV
+    shell: echo 0 > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
+    with_items: "{{ sriov_devices }}"
+  - name: Network | Set SRIOV
+    shell: echo {{ item.num_vfs }} > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
+    with_items: "{{ sriov_devices }}"
+  tags: network
+ 
+
+- hosts: kube-master
+  gather_facts: false
+  roles: 
+    - role: kubernetes/network-plugin
+      vars: 
+        net_cidr: "{{ pod_network_cidr }}"
+        svc_cidr: "{{ service_cidr }}"
+        nv_k8s_yamls_version: devel
+  tags: network

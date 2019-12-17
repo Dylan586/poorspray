@@ -1,4 +1,3 @@
 ---
 # defaults file for roles/kubernetes/host-common
 #
-is_kube_master: "{{ inventory_hostname in groups['kube-master'] }}"

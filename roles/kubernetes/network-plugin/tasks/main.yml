@@ -1,0 +1,63 @@
+---
+# tasks file for roles/kubernetes/network-plugin
+#
+#
+- debug:
+    msg: "DEBUG {{ playbook_dir }}"
+
+- name: Network | Download nv-k8s multus yamls
+  shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/multus/{{ item }}
+  with_items:
+    - multus.yaml
+    - sriov-public-net-crd.yaml
+    - sriov-storage-net-crd.yaml
+    - sriov-stream-net-crd.yaml
+
+- name: Network | Download nv-k8s OVN yamls
+  shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/ovn/ubuntu/shared/{{ item }}
+  with_items:
+    - ovn-setup.yaml
+    - ovnkube-db.yaml
+    - ovnkube-master.yaml
+    - ovnkube-node.yaml
+
+- name: Network | Download nv-k8s SRIOV dp yamls
+  shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/sriov-dp/{{ item }}
+  with_items:
+    - sriov-dp.yaml
+
+- name: Network | Download nv-k8s SRIOV dp yamls
+  shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/sriov-cni/{{ item }}
+  with_items:
+    - sriov-cni.yaml
+
+- name: Creates directory
+  file:
+    path: "{{ network_deploy_dir }}"
+    state: directory
+
+- name: Network | ovn-k8s | Copy templates
+  template:
+    src: "{{ item }}"
+    dest: "{{ network_deploy_dir }}/{{ item }}"
+    force: yes
+  with_items:
+    - multus.yaml
+    - sriov-public-net-crd.yaml
+    - sriov-storage-net-crd.yaml
+    - sriov-stream-net-crd.yaml
+    - ovn-setup.yaml
+    - ovnkube-db.yaml
+    - ovnkube-master.yaml
+    - ovnkube-node.yaml
+    - sriov-dp.yaml
+    - sriov-cni.yaml
+
+        
+
+# zero and set sriov vf num
+# apply multus
+# apply ovn
+# apply sriov dp
+# apply sriov-cni
+#

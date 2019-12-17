@@ -85,7 +85,14 @@
 - name: Get a list of all pods from any namespace
   k8s_facts:
     kind: Pod
+    namespace: kube-system
   register: pod_list
+  tags: foo
+  when: is_kube_master
+
+- name: 
+  debug:
+    var: pod_list
   tags: foo
   when: is_kube_master
  

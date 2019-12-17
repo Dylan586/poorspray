@@ -1,0 +1,7 @@
+---
+# defaults file for roles/kubernetes/network-plugin
+#
+pod_network_cidr: 192.168.0.0/16
+service_cidr: 10.90.0.0/16
+K8S_apiserver_address: 10.50.55.6
+network_deploy_dir: /root/k8snet-deploy

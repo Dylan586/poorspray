@@ -1,0 +1,7 @@
+
+
+is_kube_master: "{{ inventory_hostname in groups['kube-master'] }}"
+is_kube_node: "{{ inventory_hostname in groups['kube-node'] }}"
+
+sriov_devices:
+  - {dev_name: enp175s0, num_vfs: 4}
