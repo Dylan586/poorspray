@@ -14,6 +14,10 @@ master-06
 node-09
 node-12
 
+[game-hosts]
+node-09
+node-12
+
 [k8s-cluster:children]
 kube-master
 kube-node

@@ -63,6 +63,22 @@
 - name: Update apt and install docker-ce
   apt: update_cache=yes force=yes name=docker-ce state=latest
 
+- name: Clean ovn on master
+  file:
+    state: "{{ item }}"
+    path: "/var/lib/openvswitch"
+  with_items:
+    - absent
+    - directory
+
+- name: Clean ovs old db
+  file:
+    state: "{{ item }}"
+    path: "/etc/openvswitch"
+  with_items:
+    - absent
+    - directory
+
 - name: remove ovs
   apt:
     name: "{{ item }}"
@@ -82,19 +98,6 @@
     state: present
   tags: ovs
 
-- name: Get a list of all pods from any namespace
-  k8s_facts:
-    kind: Pod
-    namespace: kube-system
-  register: pod_list
-  tags: foo
-  when: is_kube_master
-
-- name: 
-  debug:
-    var: pod_list
-  tags: foo
-  when: is_kube_master
  
    
    

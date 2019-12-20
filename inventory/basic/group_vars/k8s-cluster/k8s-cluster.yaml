@@ -2,6 +2,15 @@
 
 is_kube_master: "{{ inventory_hostname in groups['kube-master'] }}"
 is_kube_node: "{{ inventory_hostname in groups['kube-node'] }}"
+is_game_host: "{{ inventory_hostname in groups['game-hosts'] }}"
 
 sriov_devices:
   - {dev_name: enp175s0, num_vfs: 4}
+
+game_server_sriov_stream_pf: enp175s0
+
+node-09_stream_range_start: 10.1.32.121
+node-09_stream_range_end: 10.1.32.140
+node-12_stream_range_start: 10.1.32.141
+node-12_stream_range_end: 10.1.32.160
+

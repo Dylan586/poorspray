@@ -3,7 +3,7 @@
 #
 #
 - debug:
-    msg: "DEBUG {{ playbook_dir }}"
+    msg: "DEBUG {{ playbook_dir }} {{ inventory_hostname }}  {{ inventory_hostname_short }}"
 
 - name: Network | Download nv-k8s multus yamls
   shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/multus/{{ item }}
@@ -12,6 +12,8 @@
     - sriov-public-net-crd.yaml
     - sriov-storage-net-crd.yaml
     - sriov-stream-net-crd.yaml
+  delegate_to: localhost
+  run_once: true
 
 - name: Network | Download nv-k8s OVN yamls
   shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/ovn/ubuntu/shared/{{ item }}
@@ -20,21 +22,29 @@
     - ovnkube-db.yaml
     - ovnkube-master.yaml
     - ovnkube-node.yaml
+  delegate_to: localhost
+  run_once: true
 
 - name: Network | Download nv-k8s SRIOV dp yamls
   shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/sriov-dp/{{ item }}
   with_items:
     - sriov-dp.yaml
+  delegate_to: localhost
+  run_once: true
 
 - name: Network | Download nv-k8s SRIOV dp yamls
   shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/sriov-cni/{{ item }}
   with_items:
     - sriov-cni.yaml
+  delegate_to: localhost
+  run_once: true
 
-- name: Creates directory
+- name: Network | Creates the deployment directory
   file:
     path: "{{ network_deploy_dir }}"
     state: directory
+  delegate_to: localhost
+  run_once: true
 
 - name: Network | ovn-k8s | Copy templates
   template:
@@ -52,8 +62,96 @@
     - ovnkube-node.yaml
     - sriov-dp.yaml
     - sriov-cni.yaml
+  delegate_to: localhost
+  run_once: true
 
-        
+- name: Network | | Cleanup | delete sriov device plugin
+  shell: kubectl delete -f {{ network_deploy_dir }}/{{ item }}
+  ignore_errors: true
+  with_items:
+    - sriov-dp.yaml
+  when: is_kube_master
+
+- name: Network | Cleanup | delete ovn-k8s
+  shell: kubectl delete -f {{ network_deploy_dir }}/{{ item }}
+  ignore_errors: true
+  no_log: true
+  args:
+    warn: false
+  with_items:
+    - ovnkube-node.yaml
+    - ovnkube-master.yaml
+    - ovnkube-db.yaml
+    - ovn-setup.yaml
+  when: is_kube_master
+
+- name: Network | | Cleanup | delete Multus
+  shell: kubectl delete -f {{ network_deploy_dir }}/{{ item }}
+  ignore_errors: true
+  no_log: true
+  args:
+    warn: false
+  with_items:
+    - multus.yaml
+  when: is_kube_master
+
+- name: Network | Zeroize SRIOV
+  shell: echo 0 > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
+  with_items: "{{ sriov_devices }}"
+  when: is_kube_node
+
+- name: Network | Set SRIOV
+  shell: echo {{ item.num_vfs }} > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
+  with_items: "{{ sriov_devices }}"
+  when: is_kube_node
+
+- name: Network | deploy Multus
+  shell: kubectl apply -f {{ network_deploy_dir }}/{{ item }}
+  with_items:
+    - multus.yaml
+    - sriov-public-net-crd.yaml 
+    - sriov-storage-net-crd.yaml 
+    - sriov-stream-net-crd.yaml
+  when: is_kube_master
+
+- name: Network | deploy ovn-k8s
+  shell: kubectl apply -f {{ network_deploy_dir }}/{{ item }}
+  with_items:
+    - ovn-setup.yaml
+    - ovnkube-db.yaml
+    - ovnkube-master.yaml
+    - ovnkube-node.yaml
+  when: is_kube_master
+
+- name: Network | Creates the sriov dp config directory
+  file:
+    path: /etc/pcidp
+    state: directory
+  when: is_game_host
+
+- name: Network | ovn-k8s | Copy templates of game host sriov config
+  template:
+    src: "{{ item }}"
+    dest: /etc/pcidp/config.json
+    force: yes
+  with_items:
+    - sriov_resource_game_server.json.j2
+  when: is_game_host
+
+- name: Network | ovn-k8s | Copy templates of game host sriov cni conf
+  template:
+    src: "{{ item }}"
+    dest: /etc/cni/net.d/{{ item }}
+    force: yes
+  with_items:
+    - 10-sriov_net.conf
+  when: is_game_host
+
+- name: Network | deploy sriov device plugin
+  shell: kubectl apply -f {{ network_deploy_dir }}/{{ item }}
+  with_items:
+    - sriov-dp.yaml
+  when: is_kube_master
 
 # zero and set sriov vf num
 # apply multus
