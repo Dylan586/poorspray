@@ -38,7 +38,7 @@ spec:
       containers:
 
       - name: ovn-controller
-        image: "quay.io/nvidia/ovnkube-u:be6ae7feb169"
+        image: "quay.io/nvidia/ovnkube-u:b727a46a5d59"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-controller"]
@@ -104,7 +104,7 @@ spec:
         lifecycle:
 
       - name: ovnkube-node
-        image: "quay.io/nvidia/ovnkube-u:be6ae7feb169"
+        image: "quay.io/nvidia/ovnkube-u:b727a46a5d59"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-node"]

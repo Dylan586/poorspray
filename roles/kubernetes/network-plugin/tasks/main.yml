@@ -21,7 +21,7 @@
     - ovn-setup.yaml
     - ovnkube-db.yaml
     - ovnkube-master.yaml
-    - ovnkube-node.yaml
+      #- ovnkube-node.yaml
   delegate_to: localhost
   run_once: true
 

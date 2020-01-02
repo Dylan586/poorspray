@@ -44,12 +44,6 @@
     force: yes
   when: is_kube_master
 
-- name: install openshift python for ansible k8s module
-  pip:
-    name: openshift
-  when: is_kube_master
-  tags: openshift
-
 - name: Add Docker GPG apt Key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg

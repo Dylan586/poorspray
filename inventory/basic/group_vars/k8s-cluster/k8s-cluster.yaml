@@ -14,3 +14,5 @@ node-09_stream_range_end: 10.1.32.140
 node-12_stream_range_start: 10.1.32.141
 node-12_stream_range_end: 10.1.32.160
 
+ovn_gateway_opts: "--gateway-interface=enp175s0 --gateway-nexthop=10.50.55.1"
+

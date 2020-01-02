@@ -50,10 +50,4 @@
       msg: "DEBUG {{ playbook_dir }} {{ inventory_hostname }}  {{ inventory_hostname_short }}"
   tags: foo
 
-- hosts: k8s-cluster
-  tasks:
-  - debug:
-      msg: "DEBUG {{ vars[inventory_hostname + '_start'] }}"
-    when: is_kube_node
-  tags: foo
  
