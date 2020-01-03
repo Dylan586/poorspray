@@ -73,6 +73,23 @@
     - absent
     - directory
 
+
+- name: Apply network
+  shell: netplan apply
+  args:
+    warn: false
+  ignore_errors: true
+  tags: cleanup
+
+- name: Clean ovs bridges
+  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br
+  args:
+    warn: false
+  ignore_errors: true
+  tags: ovs
+  tags: cleanup
+
+
 - name: remove ovs
   apt:
     name: "{{ item }}"
