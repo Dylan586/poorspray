@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ub-pod
   annotations:
-    v1.multus-cni.io/default-network: sriov-stream-net
+    k8s.v1.cni.cncf.io/networks: sriov-stream-net
 spec:
   containers:
   - image: shaharklein/ub-gen:5

@@ -153,6 +153,12 @@
     - sriov-dp.yaml
   when: is_kube_master
 
+- name: Network | deploy sriov CNI
+  shell: kubectl apply -f {{ network_deploy_dir }}/{{ item }}
+  with_items:
+    - sriov-cni.yaml
+  when: is_kube_master
+
 # zero and set sriov vf num
 # apply multus
 # apply ovn

@@ -9,10 +9,10 @@ sriov_devices:
 
 game_server_sriov_stream_pf: enp175s0
 
-node-09_stream_range_start: 10.1.32.121
-node-09_stream_range_end: 10.1.32.140
-node-12_stream_range_start: 10.1.32.141
-node-12_stream_range_end: 10.1.32.160
+node-09_stream_range_start: 10.1.12.121
+node-09_stream_range_end: 10.1.12.140
+node-12_stream_range_start: 10.1.12.141
+node-12_stream_range_end: 10.1.12.160
 
 ovn_gateway_opts: "--gateway-interface=enp175s0 --gateway-nexthop=10.50.55.1"
 

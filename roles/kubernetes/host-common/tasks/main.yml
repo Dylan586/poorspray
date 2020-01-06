@@ -86,8 +86,9 @@
   args:
     warn: false
   ignore_errors: true
-  tags: ovs
-  tags: cleanup
+  tags: 
+  - ovs
+  - cleanup
 
 
 - name: remove ovs
@@ -107,6 +108,17 @@
   apt: 
     name: openvswitch-switch
     state: present
+  tags: ovs
+
+- name: run ovs
+  systemd:
+    state: started
+    name: openvswitch-switch
+  tags: ovs
+
+  #  ovs-vsctl set Open_vSwith . external_ids:ovn-encap-ip=""
+- name: run ovs
+  shell: ovs-vsctl set Open_vSwitch . external_ids:ovn-encap-ip={{ hostvars[inventory_hostname].ansible_host }}
   tags: ovs
 
  

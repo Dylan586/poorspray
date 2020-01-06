@@ -47,7 +47,7 @@
 - hosts: k8s-cluster
   tasks:
   - debug:
-      msg: "DEBUG {{ playbook_dir }} {{ inventory_hostname }}  {{ inventory_hostname_short }}"
+      msg: "DEBUG {{ playbook_dir }} {{ inventory_hostname }}  {{ inventory_hostname_short }} {{ hostvars[inventory_hostname].ansible_host }} "
   tags: foo
 
  
