@@ -29,7 +29,7 @@ spec:
         name: ovnkube-master
         component: network
         type: infra
-        beta.kubernetes.io/os: "linux"
+        kubernetes.io/os: "linux"
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
     spec:
@@ -44,7 +44,7 @@ spec:
 
       # ovn-northd - v3
       - name: ovn-northd
-        image: "quay.io/nvidia/ovnkube-u:15f935d2a2e5"
+        image: "quay.io/nvidia/ovnkube-u:1325bd5257b2"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "run-ovn-northd"]
@@ -61,7 +61,11 @@ spec:
           readOnly: true
         - mountPath: /var/log/openvswitch/
           name: host-var-log-ovs
+        - mountPath: /var/log/ovn/
+          name: host-var-log-ovs
         - mountPath: /var/run/openvswitch/
+          name: host-var-run-ovs
+        - mountPath: /var/run/ovn/
           name: host-var-run-ovs
 
         resources:
@@ -111,7 +115,7 @@ spec:
       # end of container
 
       - name: nbctl-daemon
-        image: "quay.io/nvidia/ovnkube-u:15f935d2a2e5"
+        image: "quay.io/nvidia/ovnkube-u:1325bd5257b2"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "run-nbctld"]
@@ -122,7 +126,11 @@ spec:
         volumeMounts:
         - mountPath: /var/log/openvswitch/
           name: host-var-log-ovs
+        - mountPath: /var/log/ovn/
+          name: host-var-log-ovs
         - mountPath: /var/run/openvswitch/
+          name: host-var-run-ovs
+        - mountPath: /var/run/ovn/
           name: host-var-run-ovs
 
         resources:
@@ -152,7 +160,7 @@ spec:
         lifecycle:
 
       - name: ovnkube-master
-        image: "quay.io/nvidia/ovnkube-u:15f935d2a2e5"
+        image: "quay.io/nvidia/ovnkube-u:1325bd5257b2"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-master"]
@@ -168,6 +176,8 @@ spec:
         - mountPath: /var/log/ovn-kubernetes/
           name: host-var-log-ovnkube
         - mountPath: /var/run/openvswitch/
+          name: host-var-run-ovs
+        - mountPath: /var/run/ovn/
           name: host-var-run-ovs
 
         resources:
@@ -223,7 +233,7 @@ spec:
 
       nodeSelector:
         node-role.kubernetes.io/master: ""
-        beta.kubernetes.io/os: "linux"
+        kubernetes.io/os: "linux"
       volumes:
       # TODO: Need to check why we need this?
       - name: host-var-run-dbus

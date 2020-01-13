@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ub-pod
+  labels:
+    app: ub-pod
+spec:
+  containers:
+  - image: shaharklein/ub-gen:7
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+    name: ub-pod
+

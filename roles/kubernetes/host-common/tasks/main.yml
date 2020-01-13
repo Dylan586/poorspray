@@ -1,6 +1,17 @@
 ---
 # tasks file for roles/kubernetes/host-common
 #
+#
+- name: Assign inventory name to hostnames
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Add hostname resolv
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ ansible_host }} {{ inventory_hostname }}"
+    state: present
+
 - name: Clean apt sources list
   file:
     state: "{{ item }}"
@@ -56,6 +67,7 @@
 
 - name: Update apt and install docker-ce
   apt: update_cache=yes force=yes name=docker-ce state=latest
+  tags: ddd
 
 - name: Clean ovn on master
   file:
@@ -90,7 +102,6 @@
   - ovs
   - cleanup
 
-
 - name: remove ovs
   apt:
     name: "{{ item }}"
@@ -116,9 +127,17 @@
     name: openvswitch-switch
   tags: ovs
 
+- name: get ovn-kube-util
+  shell: docker run --rm -v /usr/bin:/host/usr/bin -it quay.io/gmoodalbail/deliver-ovn-util:v0.1
+  tags: foo
+
+- name: set phys br
+  shell: ovn-kube-util nics-to-bridge {{ game_server_sriov_stream_pf }}
+  tags: foo
+
   #  ovs-vsctl set Open_vSwith . external_ids:ovn-encap-ip=""
-- name: run ovs
-  shell: ovs-vsctl set Open_vSwitch . external_ids:ovn-encap-ip={{ hostvars[inventory_hostname].ansible_host }}
+- name: set encap ip
+  shell: ovs-vsctl set Open_vSwitch . external_ids:ovn-encap-ip={{ hostvars[inventory_hostname].ovn_encap_ip }}
   tags: ovs
 
  

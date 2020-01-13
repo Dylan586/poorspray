@@ -3,9 +3,9 @@
 #nd-sjc3a-c18-cpu-09    ansible_host=10.0.2.21
 #nd-sjc3a-c18-cpu-12    ansible_host=10.0.2.24
 
-master-06       ansible_host=10.50.55.6
-node-09         ansible_host=10.50.55.9
-node-12         ansible_host=10.50.55.12
+master-06       ansible_host=10.0.2.18 ovn_encap_ip=10.0.2.18
+node-09         ansible_host=10.0.2.21 ovn_encap_ip=10.0.2.21
+node-12         ansible_host=10.0.2.24 ovn_encap_ip=10.0.2.24
 
 [kube-master]
 master-06

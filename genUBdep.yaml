@@ -1,0 +1,28 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: ubgen-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ubgen
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: ubgen
+      annotations:
+        k8s.v1.cni.cncf.io/networks: sriov-stream-net
+    spec:
+      containers:
+      - image: shaharklein/ub-gen:7
+        command:
+          - sleep
+          - "3600"
+        imagePullPolicy: IfNotPresent
+        name: ub-pod
+        resources:
+         requests:
+           intel.com/sriov_stream: '1'
+         limits:
+           intel.com/sriov_stream: '1'
