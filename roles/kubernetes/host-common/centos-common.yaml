@@ -1,0 +1,127 @@
+
+- name: Add Docker repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docer-ce.repo
+  become: yes
+
+- name: pre task for docker
+  yum:
+   name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+
+
+- name: Install Docker
+  package:
+    name: docker-ce
+    state: latest
+  become: yes
+
+- name: run docker
+  systemd:
+    state: started
+    name: docker
+
+- name: Ensure Kubernetes repository exists.
+  yum_repository:
+    name: kubernetes
+    description: Kubernetes
+    enabled: true
+    gpgcheck: true
+    repo_gpgcheck: true
+    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    gpgkey:
+      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+- name: Add Kubernetes GPG keys.
+  rpm_key:
+    key: "{{ item }}"
+    state: present
+  register: kubernetes_rpm_key
+  with_items:
+    - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+    - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+- name: Make cache if Kubernetes GPG key changed.
+  command: "yum -q makecache -y --disablerepo='*' --enablerepo='kubernetes'"
+  when: kubernetes_rpm_key is changed
+  args:
+    warn: false
+
+- name: install kubelet
+  package:
+    name: kubelet
+    state: present
+    #update_cache: true
+
+- name: install kubeadm
+  package:
+    name: kubeadm
+    state: present
+
+- name: install kubectl on the master node
+  package:
+    name: kubectl
+    state: present
+  when: is_kube_master
+
+
+- name: Clean ovn on master
+  file:
+    state: "{{ item }}"
+    path: "/var/lib/openvswitch"
+  with_items:
+    - absent
+    - directory
+
+- name: Clean ovs old db
+  file:
+    state: "{{ item }}"
+    path: "/etc/openvswitch"
+  with_items:
+    - absent
+    - directory
+
+
+- name: Apply network
+  shell: ifup ens2
+  args:
+    warn: false
+  ignore_errors: true
+  tags: cleanup
+
+- name: Clean ovs bridges
+  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br
+  args:
+    warn: false
+  ignore_errors: true
+  tags: 
+  - ovs
+  - cleanup
+
+- name: remove ovs
+  package:
+    name: "{{ item }}"
+    state: absent
+  loop: [ 'openvswitch']
+  tags: ovs
+
+- name: set nv ovs repo
+  shell: "{{ centos_nv_ovs_curl }}"
+  args:
+    warn: false
+  tags: ovs
+
+- name: install ovs | Download 
+  shell: yumdownloader openvswitch 
+  tags: ovs
+
+- name: install ovs | rpm
+  shell: rpm -ivh --nodeps openvswitch-2.12.0-1.x86_64.rpm
+  tags: ovs
+
+- name: run ovs
+  systemd:
+    state: restarted
+    name: openvswitch
+  tags: ovs

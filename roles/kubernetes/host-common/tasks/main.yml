@@ -2,6 +2,7 @@
 # tasks file for roles/kubernetes/host-common
 #
 #
+
 - name: Assign inventory name to hostnames
   hostname:
     name: "{{ inventory_hostname }}"
@@ -12,133 +13,23 @@
     line: "{{ ansible_host }} {{ inventory_hostname }}"
     state: present
 
-- name: Clean apt sources list
-  file:
-    state: "{{ item }}"
-    path: "/etc/apt/sources.list.d"
-  with_items:
-    - absent
-    - directory
+- name: Run Ubuntu host common tasks
+  import_tasks: ubuntu-common.yaml
+  when: ansible_distribution == "Ubuntu"
 
-- name: Install required system packages
-  apt: name={{ item }} state=latest update_cache=yes
-  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+- name: Run CentOS host common tasks
+  import_tasks: centos-common.yaml
+  when: ansible_distribution == "CentOS"
 
-- name: add Kubernetes apt-key
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
+  #- name: get ovn-kube-util
+  #shell: docker run --rm -v /usr/bin:/host/usr/bin -it quay.io/gmoodalbail/deliver-ovn-util:v0.1
 
-- name: add Kubernetes' APT repository
-  apt_repository:
-   repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
-   state: present
-   update_cache: yes
-
-- name: install kubelet
-  apt:
-    name: kubelet={{ kubernetes_version }}
-    state: present
-    force: yes
-    #update_cache: true
-
-- name: install kubeadm
-  apt:
-    name: kubeadm={{ kubernetes_version }}
-    state: present
-    force: yes
-
-- name: install kubectl on the master node
-  apt:
-    name: kubectl={{ kubernetes_version }}
-    state: present
-    force: yes
-  when: is_kube_master
-
-- name: Add Docker GPG apt Key
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-
-- name: Add Docker Repository
-  apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu bionic stable
-    state: present
-
-- name: Update apt and install docker-ce
-  apt: update_cache=yes force=yes name=docker-ce state=latest
-  tags: ddd
-
-- name: Clean ovn on master
-  file:
-    state: "{{ item }}"
-    path: "/var/lib/openvswitch"
-  with_items:
-    - absent
-    - directory
-
-- name: Clean ovs old db
-  file:
-    state: "{{ item }}"
-    path: "/etc/openvswitch"
-  with_items:
-    - absent
-    - directory
-
-
-- name: Apply network
-  shell: netplan apply
-  args:
-    warn: false
-  ignore_errors: true
-  tags: cleanup
-
-- name: Clean ovs bridges
-  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br
-  args:
-    warn: false
-  ignore_errors: true
-  tags: 
-  - ovs
-  - cleanup
-
-- name: remove ovs
-  apt:
-    name: "{{ item }}"
-    state: absent
-  loop: [ 'openvswitch-switch', 'openvswitch-common', 'libopenvswitch']
-  tags: ovs
-
-- name: set nv ovs repo
-  shell: "{{ nv_ovs_curl }}"
-  args:
-    warn: false
-  tags: ovs
-
-- name: install ovs
-  apt: 
-    name: openvswitch-switch
-    state: present
-  tags: ovs
-
-- name: run ovs
-  systemd:
-    state: started
-    name: openvswitch-switch
-  tags: ovs
-
-- name: get ovn-kube-util
-  shell: docker run --rm -v /usr/bin:/host/usr/bin -it quay.io/gmoodalbail/deliver-ovn-util:v0.1
-  tags: foo
-
-- name: set phys br
-  shell: ovn-kube-util nics-to-bridge {{ game_server_sriov_stream_pf }}
-  tags: foo
+  #- name: set phys br
+  #shell: ovn-kube-util nics-to-bridge {{ game_server_sriov_stream_pf }}
 
   #  ovs-vsctl set Open_vSwith . external_ids:ovn-encap-ip=""
 - name: set encap ip
   shell: ovs-vsctl set Open_vSwitch . external_ids:ovn-encap-ip={{ hostvars[inventory_hostname].ovn_encap_ip }}
-  tags: ovs
 
  
    

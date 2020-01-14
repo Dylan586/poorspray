@@ -38,7 +38,7 @@ spec:
       containers:
 
       - name: ovn-controller
-        image: "quay.io/nvidia/ovnkube-u:1325bd5257b2"
+        image: "quay.io/nvidia/ovnkube-u:d325289ad7e3"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-controller"]
@@ -108,7 +108,7 @@ spec:
         lifecycle:
 
       - name: ovnkube-node
-        image: "quay.io/nvidia/ovnkube-u:1325bd5257b2"
+        image: "quay.io/nvidia/ovnkube-u:d325289ad7e3"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-node"]
@@ -177,7 +177,7 @@ spec:
         - name: OVN_GATEWAY_MODE
           value: "shared"
         - name: OVN_GATEWAY_OPTS
-          value: "{{ ovn_gateway_opts }}"
+          value: ""
 
         ports:
         - name: healthz

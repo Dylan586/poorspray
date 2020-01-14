@@ -7,12 +7,21 @@
 
 ---
 - hosts: all
+  become: true
+  tasks:
+  - debug:
+      msg: "DEBUG {{ playbook_dir }} {{ inventory_hostname }}  {{ inventory_hostname_short }} {{ hostvars[inventory_hostname].ansible_host }} {{ hostvars[inventory_hostname].ansible_distribution }} {{ ansible_os_family }}"
+    tags: foo2
+    #when: ansible_distribution == "CentOS"
+
+- hosts: all
   gather_facts: false
   roles: 
     - role: kubernetes/host-common
       vars:
         kubernetes_version: 1.16.3-00
-        nv_ovs_curl: curl -s https://2d0158bd54acb8195b4b8cc465e2ad839865f45dd45efcd5:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-12-0/script.deb.sh | bash
+        ubuntu_nv_ovs_curl: curl -s https://2d0158bd54acb8195b4b8cc465e2ad839865f45dd45efcd5:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-12-0/script.deb.sh | bash
+        centos_nv_ovs_curl: curl -s https://dde5dee3fddef955ebe8f8b548882e19180dfe1d9386e46c:@packages.nvidia.com/install/repositories/sdn/centos8-2-12-0-1/script.rpm.sh | os=el dist=7  bash
   tags: install-stuff
 
 
@@ -44,10 +53,5 @@
         nv_k8s_yamls_version: devel
   tags: network
 
-- hosts: k8s-cluster
-  tasks:
-  - debug:
-      msg: "DEBUG {{ playbook_dir }} {{ inventory_hostname }}  {{ inventory_hostname_short }} {{ hostvars[inventory_hostname].ansible_host }} "
-  tags: foo
 
  
