@@ -50,18 +50,19 @@
 
 - name: install kubelet
   package:
-    name: kubelet
+    name: kubelet-{{ kubernetes_version }}
     state: present
     #update_cache: true
+  tags: foo3
 
 - name: install kubeadm
   package:
-    name: kubeadm
+    name: kubeadm-{{ kubernetes_version }}
     state: present
 
 - name: install kubectl on the master node
   package:
-    name: kubectl
+    name: kubectl-{{ kubernetes_version }}
     state: present
   when: is_kube_master
 
@@ -83,11 +84,10 @@
     - directory
 
 
-- name: Apply network
-  shell: ifup ens2
-  args:
-    warn: false
-  ignore_errors: true
+- name: Reapply Network
+  systemd:
+    state: restarted
+    name: NetworkManager
   tags: cleanup
 
 - name: Clean ovs bridges
