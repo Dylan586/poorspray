@@ -44,7 +44,7 @@ spec:
 
       # ovn-northd - v3
       - name: ovn-northd
-        image: "quay.io/nvidia/ovnkube-u:d325289ad7e3"
+        image: "quay.io/nvidia/ovnkube-u:e14fe6952ce1"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "run-ovn-northd"]
@@ -115,7 +115,7 @@ spec:
       # end of container
 
       - name: nbctl-daemon
-        image: "quay.io/nvidia/ovnkube-u:d325289ad7e3"
+        image: "quay.io/nvidia/ovnkube-u:e14fe6952ce1"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "run-nbctld"]
@@ -160,7 +160,7 @@ spec:
         lifecycle:
 
       - name: ovnkube-master
-        image: "quay.io/nvidia/ovnkube-u:d325289ad7e3"
+        image: "quay.io/nvidia/ovnkube-u:e14fe6952ce1"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-master"]

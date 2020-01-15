@@ -1,3 +1,8 @@
+- name: stop and disable Firewall
+  systemd:
+    state: stopped
+    enabled: no
+    name: firewalld
 
 - name: Add Docker repo
   get_url:
