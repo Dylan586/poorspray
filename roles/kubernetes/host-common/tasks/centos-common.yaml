@@ -4,6 +4,24 @@
     enabled: no
     name: firewalld
 
+- name: Remove swapfile from /etc/fstab
+  mount:
+    name: "{{ item }}"
+    fstype: swap
+    state: absent
+  with_items:
+    - swap
+    - none
+
+- name: check swap
+  command: /sbin/swapon -s
+  register: swapon
+  changed_when: no
+- name: Disable swap
+  command: /sbin/swapoff -a
+  when: swapon.stdout
+
+
 - name: Add Docker repo
   get_url:
     url: https://download.docker.com/linux/centos/docker-ce.repo
@@ -24,6 +42,7 @@
 - name: run docker
   systemd:
     state: started
+    enabled: yes
     name: docker
 
 - name: Ensure Kubernetes repository exists.
@@ -59,6 +78,12 @@
     state: present
     #update_cache: true
   tags: foo3
+
+- name: run kubelet
+  systemd:
+    state: started
+    enabled: yes
+    name: kubelet
 
 - name: install kubeadm
   package:
