@@ -4,6 +4,7 @@ metadata:
   name: ub-pod
   labels:
     app: ub-pod
+    name: ub-pod
 spec:
   containers:
   - image: shaharklein/ub-gen:7

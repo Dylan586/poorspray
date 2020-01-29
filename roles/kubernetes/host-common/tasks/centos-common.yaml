@@ -1,3 +1,7 @@
+#XXX systemctl stop NetworkManager
+# systemctl disable NetworkManager
+# install network-scripts
+
 - name: stop and disable Firewall
   systemd:
     state: stopped
@@ -112,6 +116,7 @@
   with_items:
     - absent
     - directory
+  tags: ovs
 
 
 - name: Reapply Network
@@ -119,6 +124,9 @@
     state: restarted
     name: NetworkManager
   tags: cleanup
+
+- name: Reapply Network workaround
+  shell: ifup ens2
 
 - name: Clean ovs bridges
   shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br
