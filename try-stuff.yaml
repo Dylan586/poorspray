@@ -1,0 +1,26 @@
+---
+- hosts: all
+  name: d1
+  vars:
+    dev: eno1
+  tasks:
+    - slurp: 
+        src: /sys/class/net/{{ dev }}/address
+      register: mac
+    - debug:
+        msg: "{{ mac.content | b64decode | replace('\n', '') }}"
+
+- hosts: all
+  name: d2
+  vars:
+     dev: eno1
+     contents: "{{ lookup('file', '/sys/class/net/eno1/address') }}"
+  tasks:
+     - debug: msg="the value of foo.txt is {{ contents }}"
+
+     
+
+
+
+
+

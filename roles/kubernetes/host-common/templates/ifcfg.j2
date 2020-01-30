@@ -1,0 +1,8 @@
+BOOTPROTO="none"
+DEVICE={{ ovn_encap_dev }}
+DEVICETYPE="ovs"
+TYPE=OVSPort
+OVS_BRIDGE=br{{ ovn_encap_dev }}
+NM_CONTROLLED="no"
+ONBOOT="yes"
+

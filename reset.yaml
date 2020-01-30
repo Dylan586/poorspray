@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  roles:
+    - role: reset
+      vars:
+        ovn_encap_ip_prefix: 22
+  tags: reset 
+
+

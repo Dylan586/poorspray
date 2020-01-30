@@ -8,6 +8,28 @@
     enabled: no
     name: firewalld
 
+- name: Set ifcfg
+  template:
+    src: ifcfg.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-{{ ovn_encap_dev }}
+    force: yes
+  tags: foo1
+
+- name: Get bridge mac address
+  slurp: 
+    src: /sys/class/net/{{ ovn_encap_dev }}/address
+  register: ovn_encap_dev_mac
+  tags: foo1
+
+- name: Set br ifcfg
+  vars:
+    ovn_encap_dev_hw_addr: "{{ ovn_encap_dev_mac.content | b64decode | replace('\n', '') }}"
+  template:
+    src: brifcfg.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-br{{ ovn_encap_dev }}
+    force: yes
+  tags: foo1
+
 - name: Remove swapfile from /etc/fstab
   mount:
     name: "{{ item }}"
@@ -101,48 +123,6 @@
   when: is_kube_master
 
 
-- name: Clean ovn on master
-  file:
-    state: "{{ item }}"
-    path: "/var/lib/openvswitch"
-  with_items:
-    - absent
-    - directory
-
-- name: Clean ovs old db
-  file:
-    state: "{{ item }}"
-    path: "/etc/openvswitch"
-  with_items:
-    - absent
-    - directory
-  tags: ovs
-
-
-- name: Reapply Network
-  systemd:
-    state: restarted
-    name: NetworkManager
-  tags: cleanup
-
-- name: Reapply Network workaround
-  shell: ifup ens2
-
-- name: Clean ovs bridges
-  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br
-  args:
-    warn: false
-  ignore_errors: true
-  tags: 
-  - ovs
-  - cleanup
-
-- name: remove ovs
-  package:
-    name: "{{ item }}"
-    state: absent
-  loop: [ 'openvswitch']
-  tags: ovs
 
 - name: set nv ovs repo
   shell: "{{ centos_nv_ovs_curl }}"

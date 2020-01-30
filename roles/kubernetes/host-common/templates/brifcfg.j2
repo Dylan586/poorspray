@@ -1,0 +1,12 @@
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="no"
+NAME=br{{ ovn_encap_dev }}
+DEVICE=br{{ ovn_encap_dev }}
+ONBOOT=yes
+TYPE=OVSBridge
+OVSBOOTPROTO=dhcp
+OVSDHCPINTERFACES={{ ovn_encap_dev }}
+OVS_EXTRA="set bridge br{{ ovn_encap_dev }} other-config:hwaddr={{ ovn_encap_dev_hw_addr }}"
+HOTPLUG=no
+

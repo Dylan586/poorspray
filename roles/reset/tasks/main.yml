@@ -1,0 +1,79 @@
+---
+# tasks file for reset
+#
+#
+
+#- name: Stop NetworkManager
+#  systemd:
+#    state: stopped
+#    enabled: no
+#    name: NetworkManager
+
+#- name: Remove NetworkManager
+#  package:
+#    name: NetworkManager
+#    state: absent
+#  become: yes
+
+- name: Install network-scripts
+  package:
+    name: network-scripts
+    state: latest
+  become: yes
+
+
+
+- name: Reset | set ifcfg
+  template:
+    src: ifcfg.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-{{ ovn_encap_dev }}
+    force: yes
+
+- name: Reset | remove br ifcfg
+  file: 
+    path: /etc/sysconfig/network-scripts/ifcfg-br{{ ovn_encap_dev }}
+    state: absent
+
+- name: run network-scripts
+  systemd:
+    state: restarted
+    name: network
+
+- name: Reset | Add default route
+  shell: ip r add default via 10.8.48.1 dev eno1
+  #BUG: need to build it generic
+
+- name: Clean ovs bridges
+  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br
+  args:
+    warn: false
+  ignore_errors: true
+  tags: 
+  - ovs
+  - cleanup
+
+
+- name: Clean ovn on master
+  file:
+    state: "{{ item }}"
+    path: "/var/lib/openvswitch"
+  with_items:
+    - absent
+    - directory
+
+- name: Clean ovs old db
+  file:
+    state: "{{ item }}"
+    path: "/etc/openvswitch"
+  with_items:
+    - absent
+    - directory
+  tags: reset
+
+- name: remove ovs
+  package:
+    name: "{{ item }}"
+    state: absent
+  loop: [ 'openvswitch']
+  tags: reset
+
