@@ -56,7 +56,7 @@
     name: network
 
 - name: Reset | Add default route
-  shell: ip r add default via 10.8.48.1 dev breno1
+  shell: ip r add default via {{ cluster_default_route }} dev br{{ ovn_encap_dev }} 
   #BUG: need to build it generic
 
 

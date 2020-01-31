@@ -5,6 +5,7 @@
     - role: reset
       vars:
         ovn_encap_ip_prefix: 22
+        cluster_default_route: 10.8.48.1
   tags: reset 
 
 

@@ -3,22 +3,24 @@
 #
 #
 
-#- name: Stop NetworkManager
-#  systemd:
-#    state: stopped
-#    enabled: no
-#    name: NetworkManager
+- name: Stop NetworkManager
+  systemd:
+    state: stopped
+    enabled: no
+    name: NetworkManager
+  ignore_errors: yes
 
-#- name: Remove NetworkManager
-#  package:
-#    name: NetworkManager
-#    state: absent
-#  become: yes
+- name: Remove NetworkManager
+  package:
+    name: NetworkManager
+    state: absent
+  become: yes
 
 - name: Install network-scripts
   package:
     name: network-scripts
     state: latest
+    enabled: yes
   become: yes
   ignore_errors: yes
 
@@ -41,7 +43,7 @@
     name: network
 
 - name: Reset | Add default route
-  shell: ip r add default via 10.8.48.1 dev eno1
+  shell: ip r add default via {{ cluster_default_route }} dev {{ ovn_encap_dev }}
   #BUG: need to build it generic
   ignore_errors: yes
 
