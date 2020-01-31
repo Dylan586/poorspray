@@ -1,0 +1,1000 @@
+  184  ls
+  185  vim kvirt_pv.sh 
+  186  kubectl get namespace nginx-ingress -o json
+  187  kubectl get ns
+  188  kubectl get namespace test -o json
+  189  kubectl get nodes `hostname` -o yaml | grep k8s.ovn.org
+  190  w
+  191  ovn-nbctl list ACL
+  192  export OVN_NB_DB=tcp:10.8.51.51:6641
+  193  export OVN_SB_DB=tcp:10.8.51.51:6642
+  194  ovn-nbctl list ACL
+  195  ls
+  196  cd /var/log/openvswitch/
+  197  ls
+  198  cd ../ovn-kubernetes/
+  199  ls
+  200  grep ls-add ovnkube.log 
+  201  ls
+  202  ll
+  203  less ovnkube.log 
+  204  grep ls-add ovnkube.log 
+  205  grep ls-add ovnkube-master.log 
+  206  less ovnkube-master.log 
+  207  vim vim /tmp/del_force_ns.sh
+  208  vim /tmp/del_force_ns.sh
+  209  ls
+  210  ls /tmp/
+  211  ls /tmp/NS.yaml 
+  212  kubectl apply -f /tmp/NS.yaml 
+  213  kubectl delete -f /tmp/NS.yaml 
+  214  kubectl get ns
+  215  bash -x  /tmp/del_force_ns.sh
+  216  kubectl get ns
+  217  bash -x  /tmp/del_force_ns.sh
+  218  vim /tmp/del_force_ns.sh
+  219  bash -x  /tmp/del_force_ns.sh
+  220  kubectl get ns
+  221  cd /tmp/ovn-kubernetes-verification/
+  222  vim install-ovn-k8s.bash 
+  223  git add install-ovn-k8s.bash
+  224  git commit -m "Force delete terminating ns"
+  225  git push
+  226  git log
+  227  git push
+  228  git status
+  229  git diff
+  230  git remote -v
+  231  git pull
+  232  git push
+  233  vim install-ovn-k8s.bash 
+  234  cd /tmp/
+  235  kubectl get namespace ovn-kubernetes -o json > ovn.json
+  236  vi ovn.json 
+  237  ps -aef |grep proxy
+  238  ls
+  239  export TOKEN=$(kubectl describe secret $(kubectl get secrets | grep default | cut -f1 -d ' ') | grep -E '^token' | cut -f2 -d':' | tr -d '\t')
+  240  curl -X PUT --data-binary @ovn.json http://localhost:8001/api/v1/namespaces/ovn-kubernetes/finalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  241  kubectl get nodes -o yaml |grep ovn.org
+  242  ls
+  243  cd ovn-kubernetes-verification/
+  244  ls
+  245  less install-ovn-k8s.bash 
+  246  kubectl get nodes -o yaml |grep ovn.org
+  247  cat /tmp/labels 
+  248  ll /tmp/labels 
+  249  date
+  250  ls
+  251  less runtests.sh 
+  252  kubectl get ns
+  253  kubectl get namespace nginx-ingress -o json
+  254  ls
+  255  cd /mtp
+  256  cd /tmp/
+  257  kubectl get namespace nginx-ingress -o json > nginx.json 
+  258  vi nginx.json 
+  259  curl -X PUT --data-binary @nginx.json http://localhost:8001/api/v1/namespaces/nginx-ingress/finalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  260  kubectl get nds
+  261  kubectl get ns
+  262  cd /tmp/
+  263  kubectl get namespace ovn-kubernetes -o json > ovn.json
+  264  vi ovn.json 
+  265  curl -X PUT --data-binary @ovn.json http://localhost:8001/api/v1/namespaces/ovn-kubernetes/finalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  266  kubectl get ns
+  267  kubectl get namespace nginx-ingress -o json
+  268  kubectl get namespace nginx-ingress -o json > nginx.json 
+  269  vi nginx.json 
+  270  curl -X PUT --data-binary @nginx.json http://localhost:8001/api/v1/namespaces/nginx-ingress/finalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  271  cd /var/log/ovn-kubernetes/
+  272  ls
+  273  tail -f ovnkube-master.log 
+  274  ls
+  275  ovn-nbctl list NB_Global
+  276  export OVN_SB_DB=tcp:10.8.51.51:6642
+  277  export OVN_NB_DB=tcp:10.8.51.51:6641
+  278  ovn-nbctl list NB_Global
+  279  ovn-nbctl set NB_Global . external_ids:ovn=sucks
+  280  ovn-sbctl list SB_Global
+  281  man ovn-controller
+  282  export OVN_SB_DB=tcp:10.8.51.51:6642
+  283  export OVN_NB_DB=tcp:10.8.51.51:6641
+  284  ovn-sbct list SB_Global
+  285  ovn-sbctl list SB_Global
+  286  python -m json.tools
+  287  python -m json.tool
+  288  json='{"rows":[{"external_i        ds":["map",[["datapath-type",""],["iface-types","erspan,geneve,gre,internal,ip6erspan,ip6gre,lisp,patch,stt,system,tap,vxlan"],["ovn-bridge-map        pings","locnet:br-local,physnet:breth0"],["ovn-chassis-mac-mappings",""],["ovn-cms-options",""]]]}],"until":"==","where":[["_uuid","==",["uuid"        ,"bbf93c7f-b3c8-4017-9bbf-56f9686d3fb6"]]],"columns":["external_ids"],"timeout":0,"op":"wait","table":"Chassis"},{"where":[["_uuid","==",["uuid        ","001a5f99-7408-418c-94f0-46bf3e4faf22"]]],"row":{"chassis":["uuid","bbf93c7f-b3c8-4017-9bbf-56f9686d3fb6"]},"op":"update","table":"Port_Bindi        ng"},{"where":[["_uuid","==",["uuid","62fa2449-72ea-47e6-aa8c-cd21b74a4419"]]],"row":{"chassis":["uuid","bbf93c7f-b3c8-4017-9bbf-56f9686d3fb6"]        },"op":"update","table":"Port_Binding"},{"where":[["_uuid","==",["uuid","8b72e4d9-946f-4de3-9e1c-ef665405e194"]]],"row":{"chassis":["uuid","bbf        93c7f-b3c8-4017-9bbf-56f9686d3fb6"]},"op":"update","table":"Port_Binding"},{"where":[["_uuid","==",["uuid","edb2af91-0142-43dd-b894-01ce292f10c        8"]]],"row":{"chassis":["uuid","bbf93c7f-b3c8-4017-9bbf-56f9686d3fb6"]},"op":"update","table":"Port_Binding"},{"where":[["_uuid","==",["uuid","        605c2082-17c9-4e9e-bf05-d78104a070ca"]]],"row":{"chassis":["uuid","bbf93c7f-b3c8-4017-9bbf-56f9686d3fb6"]},"op":"update","table":"Port_Binding"        },{"where":[["_uuid","==",["uuid","48a8f3e4-114d-4452-9541-3d9957b1fea4"]]],"row":{"chassis":["uuid","bbf93c7f-b3c8-4017-9bbf-56f9686d3fb6"]},"        op":"update","table":"Port_Binding"},{"where":[["_uuid","==",["uuid","c42df8f5-aa22-4c55-8ed3-9365e3b9219e"]]],"row":{"chassis":["uuid","bbf93c        7f-b3c8-4017-9bbf-56f9686d3fb6"]},"op":"update","table":"Port_Binding"},{"where":[["_uuid","==",["uuid","bbf93c7f-b3c8-4017-9bbf-56f9686d3fb6"]        ]],"row":{"external_ids":["map",[["datapath-type",""],["iface-types","erspan,geneve,gre,internal,ip6erspan,ip6gre,lisp,patch,stt,system,tap,vxl        an"],["ovn-bridge-mappings","physnet:breth0,locnet:br-local"],["ovn-chassis-mac-mappings",""],["ovn-cms-options",""]]]},"op":"update","table":"        Chassis"},{"where":[["_uuid","==",["uuid","565250e7-8966-459c-bbdb-91f988468ba4"]]],"row":{"chassis":["uuid","bbf93c7f-b3c8-4017-9bbf-56f9686d3        fb6"]},"op":"update","table":"Port_Binding"}'
+  289  echo $json |python -m json.tool
+  290  cd /tmp/ovn-kubernetes-verification/
+  291  git log
+  292  git pul;l
+  293  git pull
+  294  ls -ltrh
+  295  kubectl get ns
+  296  cd ../
+  297  cp -r ovn-kubernetes-verification/ okv2
+  298  cd ovk2
+  299  ls -ltrh
+  300  cd okv2/
+  301  vim install-ovn-k8s.bash 
+  302  vim runtests.sh 
+  303  bash -x del_terminating_namespaces.bash 
+  304  vim runtests.sh 
+  305  kubectl apply -f /tmp/NS.yaml 
+  306  kubectl delete -f /tmp/NS.yaml 
+  307  bash -x del_terminating_namespaces.bash 
+  308  kubectl get scv
+  309  kubectl get svc
+  310  bash -x del_terminating_namespaces.bash 
+  311  vim /tmp/tmp.json 
+  312  curl -k https://10.90.0.1:443/apis/k8s.cni.cncf.io/v1/namespaces/default/pods
+  313  curl -k https://10.100.0.1:443/apis/k8s.cni.cncf.io/v1/namespaces/default/pods
+  314  curl -k https://10.100.0.1:443/api/v1
+  315  bash -x del_terminating_namespaces.bash 
+  316  curl -k -H 'Content-Type: application/json' -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkRZbXBGdGlMNU9XenFOWnk4c2MzZ2ljTVU0bUpaM1JrZHJLNEoyRXZzRjgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tcTQ1OG0iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjJjMTEyNTk3LTVkYTYtNGJhZC04ZmJhLTdmYTgxMTM3MjZiMSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.EyIDVntFSqAo7cmPXJcpzMtIYNolXqlhYooBm-P8vlxNhKn9xX0DAnp4wTPA3NZDi3Vnag4BWblRM97M_N22P3WdBmHtAdepzhJxxxrlpfUKDV3xfB_adGXloc9DDqD0xNli2M-NmtBDtkUbb6Fn6Ewf8oX9NFKhg_3YYMGYBHMljMsFpw4ys7xhPe1Ode9er3SMFbSLkWugZsz0zUnzcU7kSgwDG6AhbsGbbJScwxHjb56kXmsim9CHiZ39pGxZ9GLAQSaaTykym_ujr34-NBvyQTzv88LNo1pPhPuVyw29KYwnwm-ne4h9c-pjLhdW7XfI-OLxBI81vNdXG6u-jg' -X PUT --data-binary @/tmp/tmp.json https://10.100.0.1:443/api/v1/namespaces/test/finalize
+  317  curl -k -H 'Content-Type: application/json' -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkRZbXBGdGlMNU9XenFOWnk4c2MzZ2ljTVU0bUpaM1JrZHJLNEoyRXZzRjgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tcTQ1OG0iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjJjMTEyNTk3LTVkYTYtNGJhZC04ZmJhLTdmYTgxMTM3MjZiMSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.EyIDVntFSqAo7cmPXJcpzMtIYNolXqlhYooBm-P8vlxNhKn9xX0DAnp4wTPA3NZDi3Vnag4BWblRM97M_N22P3WdBmHtAdepzhJxxxrlpfUKDV3xfB_adGXloc9DDqD0xNli2M-NmtBDtkUbb6Fn6Ewf8oX9NFKhg_3YYMGYBHMljMsFpw4ys7xhPe1Ode9er3SMFbSLkWugZsz0zUnzcU7kSgwDG6AhbsGbbJScwxHjb56kXmsim9CHiZ39pGxZ9GLAQSaaTykym_ujr34-NBvyQTzv88LNo1pPhPuVyw29KYwnwm-ne4h9c-pjLhdW7XfI-OLxBI81vNdXG6u-jg' -X PUT --data-binary @/tmp/tmp.json https://10.100.0.1/api/v1/namespaces/test/finalize
+  318  TOKEN=$(kubectl describe secret $(kubectl get secrets | grep default | cut -f1 -d ' ') | grep -E '^token' | cut -f2 -d':' | tr -d '\t')
+  319  echo $TOKEN
+  320  curl http://localhost:8001/api/v1/namespaces --header "Authorization: Bearer $TOKEN" --insecure
+  321  curl -X PUT --data-binary @logging.json http://localhost:8001/api/v1/namespaces/logging/finalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  322  curl -X PUT --data-binary @l/tmp/tmp.json http://localhost:8001/api/v1/namespaces/ltestfinalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  323  curl -X PUT --data-binary @ltmp/tmp.json http://localhost:8001/api/v1/namespaces/ltestfinalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  324  cat /tmp/tmp.json
+  325  cp /tmp/tmp.json ./
+  326  curl -X PUT --data-binary @/tmp/tmp.json http://localhost:8001/api/v1/namespaces/ltestfinalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  327  kubectl get ns
+  328  curl -X PUT --data-binary @/tmp/tmp.json http://localhost:8001/api/v1/namespaces/test/finalize -H "Content-Type: application/json" --header "Authorization: Bearer $TOKEN" --insecure
+  329  kubectl get ns
+  330  bash -x del_terminating_namespaces.bash 
+  331  vim del_terminating_namespaces.bash 
+  332  bash  del_terminating_namespaces.bash 5
+  333  vim del_terminating_namespaces.bash 
+  334  bash  del_terminating_namespaces.bash 5
+  335  vim del_terminating_namespaces.bash 
+  336  bash  del_terminating_namespaces.bash 5 &
+  337  ls
+  338  git grep delete
+  339  git grep delete | grep ngin
+  340  git grep nginx-ingress 
+  341  git grep delete | grep ingressResource.yaml
+  342  vim ingressTest.sh 
+  343  git add del_terminating_namespaces.bash 
+  344  git add install-ovn-k8s.bash 
+  345  git status
+  346  git diff ingressTest.sh
+  347  git commit -m"add stuck ns termination"
+  348  git push
+  349  vim ingressTest.sh 
+  350  git add ingressTest.sh 
+  351  git commit -m"Add some logging to stuck ns termination"
+  352  git push
+  353  cd ../tmp/
+  354  cd ../ovn-kubernetes-verification/
+  355  ls
+  356  ls ./del_terminating_namespaces.bash
+  357  cd /tmp/okv2
+  358  vim del_terminating_namespaces.bash 
+  359  kubectl apply -f /tmp/NS.yaml 
+  360  kubectl delete -f /tmp/NS.yaml 
+  361  ls
+  362  vim install-ovn-k8s.bash 
+  363  kubectl apply -f /tmp/NS.yaml 
+  364  kubectl delete -f /tmp/NS.yaml 
+  365  kubectl apply -f /tmp/NS.yaml 
+  366  kubectl delete -f /tmp/NS.yaml 
+  367  kubectl apply -f /tmp/NS.yaml 
+  368  kubectl delete -f /tmp/NS.yaml 
+  369  vim install-ovn-k8s.bash 
+  370  git add install-ovn-k8s.bash 
+  371  git add ingressTest.sh 
+  372  git diff
+  373  git add del_terminating_namespaces.bash 
+  374  git commit -m "Force delete terminating ns directory"
+  375  git pus
+  376  git push
+  377  git status
+  378  kubectl get ns
+  379  vim install-ovn-k8s.bash 
+  380  git add del_terminating_namespaces.bash 
+  381  git commit -m "ignore error on deleteing ns"
+  382  git push
+  383  vim del_terminating_namespaces.bash 
+  384  kubectl get apiservices
+  385  kubectl delete apiservice v1alpha3.subresources.kubevirt.io
+  386  kubectl get apiservices
+  387  kubectl apply -f /tmp/NS.yaml 
+  388  kubectl delete -f /tmp/NS.yaml 
+  389  cd /tmp/
+  390  cd okv1/
+  391  ls
+  392  bash kvirt_pv.sh
+  393  kubectl get apiservices
+  394  kubectl get apiservices | grep ServiceNotFound | awk 
+  395  kubectl get apiservices | grep ServiceNotFound | cut -f1-
+  396  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" "
+  397  #kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" "
+  398  kubectl delete apiservice v1alpha3.subresources.kubevirt.io
+  399  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" "
+  400  ovn-sbctl list Multicast_Group
+  401  export OVN_NB_DB=tcp:10.8.51.51:6641
+  402  ovn-sbctl list SB_Global
+  403  export OVN_SB_DB=tcp:10.8.51.51:6642
+  404  ovn-sbctl list Multicast_Group
+  405  ovn-sbctl list Datapath_Binding a57d270a-7cba-469b-8b18-006d0a4db18a
+  406  ovn-sbctl list Multicast_Group |grep datapath
+  407  ovn-sbctl list Multicast_Group |grep datapath |cut -f2 -d:
+  408  ovn-sbctl list Multicast_Group |grep datapath |cut -f2 -d: |xargs -I {} ovn-sbctl list Datapath_bidning {}
+  409  ovn-sbctl list Multicast_Group |grep datapath |cut -f2 -d: |xargs -I {} ovn-sbctl list Datapath_binding {}
+  410  ovn-sbctl list Multicast_Group
+  411  ovn-sbctl list Datapath_binding a57d270a-7cba-469b-8b18-006d0a4db18a
+  412  echo '{"MAC_Binding":{"7e825735-74c4-4628-a9ed-894e846f5a58":{"insert":{"ip":"10.0.2.13","logical_port":"rtoe-GR_nd-sjc3a-c18-cpu-01-vm-2","mac        ":"50:6b:4b:dd:ef:6a","datapath":["uuid","529a3407-5400-4eb9-a36c-fa488f12cdc6"]}}}}' |python -m json.tool
+  413  echo '{"Multicast_Group":{"108a5694-eb5c-4afe-ad29-4ea147843197":{"delete":null}},"Port_Binding":{"f6ef4449-0a13-4ab6-b366-78f7bf7d8827":{"modi        fy":{"options":["map",[["peer","stor-node1"]]]}},"8541a26f-5545-453e-ac49-055d054c352f":{"delete":null}},"Logical_Flow":{"81da7cf3-a002-41cb-93c2-a7384bd44edf        ":{"delete":null},"24c31920-7cd3-4ff0-ac6d-a5ff84800953":{"delete":null},"059e62df-3bd6-49cf-8c06-05620ed4e470":{"delete":null}}}' |python -m json.tool
+  414  echo '{"Multicast_Group":{"108a5694-eb5c-4afe-ad29-4ea147843197":{"insert":{"ports":["uuid","8541a26f-5545-453e-ac49-055d054c352f"],"name":"_MC_flood","tunnel_key":65535,"datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"]}}},"IP_Multicast":{"4cc86be3-b206-4ebe-886e-46f1ef047511":{"insert":{"query_max_resp":1,"query_interval":150,"datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"querier":true,"idle_timeout":300,"table_size":2048,"enabled":false}}},"Logical_Flow":{"5116e05e-a14a-45c8-aac8-a0ea6c961a42":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":8,"actions":"next;"}},"24c31920-7cd3-4ff0-ac6d-a5ff84800953":{"insert":{"match":"eth.dst == 00:00:00:55:f9:4b","pipeline":"ingress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":17,"actions":"outport = \"stor-node1\"; output;"}},"9df46e41-3d1c-4f4e-9066-722390de480c":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":8,"actions":"next;"}},"0aa9154a-651d-4d80-8eba-2a7ff6b407b3":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":3,"actions":"next;"}},"adeb3071-5c12-4dd7-94b5-f9ac98ec2a7a":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"next;"}},"e8ddfff8-f83b-41c1-b774-59c0d1427051":{"insert":{"match":"nd || nd_rs || nd_ra","pipeline":"egress","priority":110,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}},"78a4a470-f7c1-495a-8466-2bdf0d74bdaf":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"next;"}},"d84ec54a-f9da-42ed-a98e-0f8f55402b19":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"next;"}},"fd7215e4-d934-49f9-9e12-de2b921fc881":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"314aa9e1-5b1c-49b1-a43f-553c1030934a":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":16,"actions":"next;"}},"085d8b75-f7ac-4cb2-bab4-c2522578dd71":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":14,"actions":"next;"}},"6d0230ac-63c4-4147-bd40-ed3d43177b97":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":3,"actions":"next;"}},"b520182b-1b5b-48b5-b274-f5be2c35b6ba":{"insert":{"match":"eth.src[40]","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"drop;"}},"059e62df-3bd6-49cf-8c06-05620ed4e470":{"insert":{"match":"outport == \"stor-node1\"","pipeline":"egress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"output;"}},"c37bde57-d400-490a-8829-28868452f897":{"insert":{"match":"reg0[0] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"ct_next;"}},"1a21080b-1bc4-4879-8557-f8cae8a43d5f":{"insert":{"match":"eth.mcast","pipeline":"ingress","priority":70,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":17,"actions":"outport = \"_MC_flood\"; output;"}},"45548344-18a6-4def-b72e-aadf069535f8":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"next;"}},"87ac15cf-a130-4a06-84dc-8eca6256ab1e":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":13,"actions":"next;"}},"06a0f0ce-e5d1-4b6c-9903-f83cc6058d7f":{"insert":{"match":"reg0[0] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"ct_next;"}},"b85634a2-1003-4e0a-b3af-09d807e82814":{"insert":{"match":"reg0[2] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"ct_lb;"}},"ffd0dd8e-2014-4dd8-885a-1f82c6c826e8":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"dda12e2c-9b83-430a-9ad3-3ccabbe66ac0":{"insert":{"match":"reg0[2] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"ct_lb;"}},"97837c6a-a28c-4ddd-9198-93f4503af476":{"insert":{"match":"reg0[1] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"ct_commit(ct_label=0/1); next;"}},"e44fa7fa-8916-424b-9e12-f4b9a0ca129c":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":6,"actions":"next;"}},"575fac1c-0cce-46df-a699-47c39a36bf3f":{"insert":{"match":"vlan.present","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"drop;"}},"2c389026-cc46-4867-a297-4d9f2e42e767":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"next;"}},"90cbe7d1-700b-48a6-b6c3-7ba338740254":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":1,"actions":"next;"}},"360e94ca-b78d-413a-883f-00064ca9e30e":{"insert":{"match":"reg0[1] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"ct_commit(ct_label=0/1); next;"}},"f0990d4a-0abf-4adb-90bc-2f3f76a56a07":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":6,"actions":"next;"}},"a257da28-ce6d-439f-865a-0852a2b28073":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"next;"}},"81da7cf3-a002-41cb-93c2-a7384bd44edf":{"insert":{"match":"inport == \"stor-node1\"","pipeline":"ingress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}},"2b43a7f1-bfa0-4bfe-a2b1-668e9faff6c6":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":15,"actions":"next;"}},"fcba3ae4-46fc-4a03-8f1b-be8c182c4924":{"insert":{"match":"nd || nd_rs || nd_ra","pipeline":"ingress","priority":110,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"d2e52239-57f2-49fd-b561-a556a0984fe6":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":12,"actions":"next;"}},"f1962bfd-c9eb-4a6a-9592-245c58ca45c0":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"next;"}},"fc85fbb2-2c45-4e3a-a543-bd5743b02a6d":{"insert":{"match":"eth.mcast","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"output;"}},"7b2f3242-66c2-4179-a77c-155b7a22c49b":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":11,"actions":"next;"}},"f31ab3fe-0123-4cd5-8cbc-b6ccffeb115f":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"next;"}},"e54dcfcc-1e18-4cd6-8196-bc40eb0c5165":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":1,"actions":"next;"}},"d5c5ff3e-f3b8-4cd1-9baf-9b2be60f9646":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}}}}'|python -m json.tool
+  415  echo '{"Multicast_Group":{"108a5694-eb5c-4afe-ad29-4ea147843197":{"insert":{"ports":["uuid","8541a26f-5545-453e-ac49-055d054c352f"],"name":"_MC_flood","tunnel_key":65535,"datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"]}}},"IP_Multicast":{"4cc86be3-b206-4ebe-886e-46f1ef047511":{"insert":{"query_max_resp":1,"query_interval":150,"datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"querier":true,"idle_timeout":300,"table_size":2048,"enabled":false}}},"Logical_Flow":{"5116e05e-a14a-45c8-aac8-a0ea6c961a42":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":8,"actions":"next;"}},"24c31920-7cd3-4ff0-ac6d-a5ff84800953":{"insert":{"match":"eth.dst == 00:00:00:55:f9:4b","pipeline":"ingress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":17,"actions":"outport = \"stor-node1\"; output;"}},"9df46e41-3d1c-4f4e-9066-722390de480c":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":8,"actions":"next;"}},"0aa9154a-651d-4d80-8eba-2a7ff6b407b3":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":3,"actions":"next;"}},"adeb3071-5c12-4dd7-94b5-f9ac98ec2a7a":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"next;"}},"e8ddfff8-f83b-41c1-b774-59c0d1427051":{"insert":{"match":"nd || nd_rs || nd_ra","pipeline":"egress","priority":110,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}},"78a4a470-f7c1-495a-8466-2bdf0d74bdaf":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"next;"}},"d84ec54a-f9da-42ed-a98e-0f8f55402b19":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"next;"}},"fd7215e4-d934-49f9-9e12-de2b921fc881":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"314aa9e1-5b1c-49b1-a43f-553c1030934a":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":16,"actions":"next;"}},"085d8b75-f7ac-4cb2-bab4-c2522578dd71":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":14,"actions":"next;"}},"6d0230ac-63c4-4147-bd40-ed3d43177b97":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":3,"actions":"next;"}},"b520182b-1b5b-48b5-b274-f5be2c35b6ba":{"insert":{"match":"eth.src[40]","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"drop;"}},"059e62df-3bd6-49cf-8c06-05620ed4e470":{"insert":{"match":"outport == \"stor-node1\"","pipeline":"egress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"output;"}},"c37bde57-d400-490a-8829-28868452f897":{"insert":{"match":"reg0[0] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"ct_next;"}},"1a21080b-1bc4-4879-8557-f8cae8a43d5f":{"insert":{"match":"eth.mcast","pipeline":"ingress","priority":70,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":17,"actions":"outport = \"_MC_flood\"; output;"}},"45548344-18a6-4def-b72e-aadf069535f8":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"next;"}},"87ac15cf-a130-4a06-84dc-8eca6256ab1e":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":13,"actions":"next;"}},"06a0f0ce-e5d1-4b6c-9903-f83cc6058d7f":{"insert":{"match":"reg0[0] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"ct_next;"}},"b85634a2-1003-4e0a-b3af-09d807e82814":{"insert":{"match":"reg0[2] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"ct_lb;"}},"ffd0dd8e-2014-4dd8-885a-1f82c6c826e8":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"dda12e2c-9b83-430a-9ad3-3ccabbe66ac0":{"insert":{"match":"reg0[2] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"ct_lb;"}},"97837c6a-a28c-4ddd-9198-93f4503af476":{"insert":{"match":"reg0[1] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"ct_commit(ct_label=0/1); next;"}},"e44fa7fa-8916-424b-9e12-f4b9a0ca129c":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":6,"actions":"next;"}},"575fac1c-0cce-46df-a699-47c39a36bf3f":{"insert":{"match":"vlan.present","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"drop;"}},"2c389026-cc46-4867-a297-4d9f2e42e767":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"next;"}},"90cbe7d1-700b-48a6-b6c3-7ba338740254":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":1,"actions":"next;"}},"360e94ca-b78d-413a-883f-00064ca9e30e":{"insert":{"match":"reg0[1] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"ct_commit(ct_label=0/1); next;"}},"f0990d4a-0abf-4adb-90bc-2f3f76a56a07":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":6,"actions":"next;"}},"a257da28-ce6d-439f-865a-0852a2b28073":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"next;"}},"81da7cf3-a002-41cb-93c2-a7384bd44edf":{"insert":{"match":"inport == \"stor-node1\"","pipeline":"ingress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}},"2b43a7f1-bfa0-4bfe-a2b1-668e9faff6c6":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":15,"actions":"next;"}},"fcba3ae4-46fc-4a03-8f1b-be8c182c4924":{"insert":{"match":"nd || nd_rs || nd_ra","pipeline":"ingress","priority":110,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"d2e52239-57f2-49fd-b561-a556a0984fe6":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":12,"actions":"next;"}},"f1962bfd-c9eb-4a6a-9592-245c58ca45c0":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"next;"}},"fc85fbb2-2c45-4e3a-a543-bd5743b02a6d":{"insert":{"match":"eth.mcast","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"output;"}},"7b2f3242-66c2-4179-a77c-155b7a22c49b":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":11,"actions":"next;"}},"f31ab3fe-0123-4cd5-8cbc-b6ccffeb115f":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"next;"}},"e54dcfcc-1e18-4cd6-8196-bc40eb0c5165":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":1,"actions":"next;"}},"d5c5ff3e-f3b8-4cd1-9baf-9b2be60f9646":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}}}}'|python -m json.tool | less
+  416  echo '{"Multicast_Group":{"108a5694-eb5c-4afe-ad29-4ea147843197":{"insert":{"ports":["uuid","8541a26f-5545-453e-ac49-055d054c352f"],"name":"_MC_flood","tunnel_key":65535,"datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"]}}},"IP_Multicast":{"4cc86be3-b206-4ebe-886e-46f1ef047511":{"insert":{"query_max_resp":1,"query_interval":150,"datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"querier":true,"idle_timeout":300,"table_size":2048,"enabled":false}}},"Logical_Flow":{"5116e05e-a14a-45c8-aac8-a0ea6c961a42":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":8,"actions":"next;"}},"24c31920-7cd3-4ff0-ac6d-a5ff84800953":{"insert":{"match":"eth.dst == 00:00:00:55:f9:4b","pipeline":"ingress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":17,"actions":"outport = \"stor-node1\"; output;"}},"9df46e41-3d1c-4f4e-9066-722390de480c":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":8,"actions":"next;"}},"0aa9154a-651d-4d80-8eba-2a7ff6b407b3":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":3,"actions":"next;"}},"adeb3071-5c12-4dd7-94b5-f9ac98ec2a7a":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"next;"}},"e8ddfff8-f83b-41c1-b774-59c0d1427051":{"insert":{"match":"nd || nd_rs || nd_ra","pipeline":"egress","priority":110,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}},"78a4a470-f7c1-495a-8466-2bdf0d74bdaf":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"next;"}},"d84ec54a-f9da-42ed-a98e-0f8f55402b19":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"next;"}},"fd7215e4-d934-49f9-9e12-de2b921fc881":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"314aa9e1-5b1c-49b1-a43f-553c1030934a":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":16,"actions":"next;"}},"085d8b75-f7ac-4cb2-bab4-c2522578dd71":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":14,"actions":"next;"}},"6d0230ac-63c4-4147-bd40-ed3d43177b97":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":3,"actions":"next;"}},"b520182b-1b5b-48b5-b274-f5be2c35b6ba":{"insert":{"match":"eth.src[40]","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"drop;"}},"059e62df-3bd6-49cf-8c06-05620ed4e470":{"insert":{"match":"outport == \"stor-node1\"","pipeline":"egress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"output;"}},"c37bde57-d400-490a-8829-28868452f897":{"insert":{"match":"reg0[0] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":5,"actions":"ct_next;"}},"1a21080b-1bc4-4879-8557-f8cae8a43d5f":{"insert":{"match":"eth.mcast","pipeline":"ingress","priority":70,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":17,"actions":"outport = \"_MC_flood\"; output;"}},"45548344-18a6-4def-b72e-aadf069535f8":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"next;"}},"87ac15cf-a130-4a06-84dc-8eca6256ab1e":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":13,"actions":"next;"}},"06a0f0ce-e5d1-4b6c-9903-f83cc6058d7f":{"insert":{"match":"reg0[0] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"ct_next;"}},"b85634a2-1003-4e0a-b3af-09d807e82814":{"insert":{"match":"reg0[2] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"ct_lb;"}},"ffd0dd8e-2014-4dd8-885a-1f82c6c826e8":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"dda12e2c-9b83-430a-9ad3-3ccabbe66ac0":{"insert":{"match":"reg0[2] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"ct_lb;"}},"97837c6a-a28c-4ddd-9198-93f4503af476":{"insert":{"match":"reg0[1] == 1","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":10,"actions":"ct_commit(ct_label=0/1); next;"}},"e44fa7fa-8916-424b-9e12-f4b9a0ca129c":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":6,"actions":"next;"}},"575fac1c-0cce-46df-a699-47c39a36bf3f":{"insert":{"match":"vlan.present","pipeline":"ingress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"drop;"}},"2c389026-cc46-4867-a297-4d9f2e42e767":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"next;"}},"90cbe7d1-700b-48a6-b6c3-7ba338740254":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":1,"actions":"next;"}},"360e94ca-b78d-413a-883f-00064ca9e30e":{"insert":{"match":"reg0[1] == 1","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"ct_commit(ct_label=0/1); next;"}},"f0990d4a-0abf-4adb-90bc-2f3f76a56a07":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":6,"actions":"next;"}},"a257da28-ce6d-439f-865a-0852a2b28073":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"next;"}},"81da7cf3-a002-41cb-93c2-a7384bd44edf":{"insert":{"match":"inport == \"stor-node1\"","pipeline":"ingress","priority":50,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}},"2b43a7f1-bfa0-4bfe-a2b1-668e9faff6c6":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":15,"actions":"next;"}},"fcba3ae4-46fc-4a03-8f1b-be8c182c4924":{"insert":{"match":"nd || nd_rs || nd_ra","pipeline":"ingress","priority":110,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":4,"actions":"next;"}},"d2e52239-57f2-49fd-b561-a556a0984fe6":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":12,"actions":"next;"}},"f1962bfd-c9eb-4a6a-9592-245c58ca45c0":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":2,"actions":"next;"}},"fc85fbb2-2c45-4e3a-a543-bd5743b02a6d":{"insert":{"match":"eth.mcast","pipeline":"egress","priority":100,"logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":9,"actions":"output;"}},"7b2f3242-66c2-4179-a77c-155b7a22c49b":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":11,"actions":"next;"}},"f31ab3fe-0123-4cd5-8cbc-b6ccffeb115f":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":7,"actions":"next;"}},"e54dcfcc-1e18-4cd6-8196-bc40eb0c5165":{"insert":{"match":"1","pipeline":"ingress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"table_id":1,"actions":"next;"}},"d5c5ff3e-f3b8-4cd1-9baf-9b2be60f9646":{"insert":{"match":"1","pipeline":"egress","logical_datapath":["uuid","6bfeeb61-2d9e-4a65-8350-d9535d2fe544"],"actions":"next;"}}}}'|python -m json.tool 
+  417  echo '{"Multicast_Group":{"108a5694-eb5c-4afe-ad29-4ea147843197":{"delete":null}},"Port_Binding":{"f6ef4449-0a13-4ab6-b366-78f7bf7d8827":{"modi        fy":{"options":["map",[["peer","stor-node1"]]]}},"8541a26f-5545-453e-ac49-055d054c352f":{"delete":null}},"Logical_Flow":{"81da7cf3-a002-41cb-93c2-a7384bd44edf        ":{"delete":null},"24c31920-7cd3-4ff0-ac6d-a5ff84800953":{"delete":null},"059e62df-3bd6-49cf-8c06-05620ed4e470":{"delete":null}}}' |python -m json.tool
+  418  vi /tmp/json.js
+  419  wc -l /tmp/json.js 
+  420  cat /tmp/json.js |python -m json.tool | less
+  421  vim /tmp/json.js 
+  422  cat /tmp/json.js |python -m json.tool | less
+  423  grep '": [' /tmp/json.js 
+  424  cat /tmp/json.js |python -m json.tool | grep '\": ['
+  425  cat /tmp/json.js |python -m json.tool | grep ': ['
+  426  cat /tmp/json.js |python -m json.tool | grep ': \['
+  427  ip ro
+  428  ip -o a show breno1
+  429  ipcalc
+  430  ipcal
+  431  ip ro
+  432  history 
+  433  cd okv1
+  434  cd /tmp/
+  435  cd okv1
+  436  ls
+  437  bash kvirt_pv.sh
+  438  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" "
+  439  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" " | xargs xargs -r -l echo
+  440  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" " | xargs xargs -r -l 
+  441  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" " 
+  442  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" " | xargs echo
+  443  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" " | xargs ls
+  444  kubectl get apiservices | grep ServiceNotFound | cut -f1 -d" " | xargs kubectl delete apiservice
+  445  kubectl get apiservices | grep ServiceNotFound 
+  446  vim install-ovn-k8s.bash 
+  447  git add install-ovn-k8s.bash
+  448  git commit -m "delete NonFound apiservice"
+  449  git push
+  450  git pull
+  451  vim install-ovn-k8s.bash 
+  452  cd /tmp/ovn-kubernetes-verification/
+  453  vim install-ovn-k8s.bash 
+  454  git pul
+  455  git pull 
+  456  vim install-ovn-k8s.bash 
+  457  git log
+  458  git show 
+  459  git log
+  460  git show 1aa30a0f36240a3bcb16a211b6faca97355a6467
+  461  git log
+  462  git show 1be8c6bad3c31f6f06ce86b953cd4614e80b459c
+  463  git stash
+  464  git log
+  465  cd ../
+  466  cp -r ovn-kubernetes-verification/ okv3
+  467  cd okv3
+  468  git rebase -r 607c251c8a72042b0ff9b43987ee2da7f4055837
+  469  git rebase -i 607c251c8a72042b0ff9b43987ee2da7f4055837
+  470  git rebase -i 607c251c8a72042b0ff9b43987ee2da7f4055837~
+  471  git log
+  472  git revert e89de98f0294daa5351feca92dba068cb4f4c593
+  473  git log
+  474  vim install-ovn-k8s.bash 
+  475  git add install-ovn-k8s.bash 
+  476  git commit -m "delete NonFound apiservice"
+  477  git push force
+  478  git push --force
+  479  cd /tmp/ovn-kubernetes-verification/
+  480  cd /tmp/okv2
+  481  git lg
+  482  git pull
+  483  cd okv1/
+  484  history 
+  485  cd /tmp/ovn-kubernetes-verification/
+  486  git log
+  487  cd ../okv1
+  488  vim install-ovn-k8s.bash 
+  489  ovs-ofctl dump-flows breno1
+  490  cd /tmp/
+  491  cp -r ovn-kubernetes-verification/ okv4
+  492  cd okv4/
+  493  vim install-ovn-k8s.bash 
+  494  kubectl get apiservices | grep ServiceNotFound
+  495  PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$ " 
+  496  # Begin prompt
+  497  # End prompt
+  498  PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$ " 
+  499  # Begin prompt
+  500  # End prompt
+  501  ovs-ofctl dump-flows breno1
+  502  vi /tmp/replaceme
+  503  cd /tmp/go/src/github.com/ovn-org/ovn-kubernetes/
+  504  ls
+  505  cd go-controller/
+  506  ls
+  507  cd ../dist/images/
+  508  ls
+  509  cd ../yaml/
+  510  ls
+  511  kubectl get pods -n ovn-kubernetes
+  512  kubectl delete -f ovnkube-node.yaml -f ovnkube-master.yaml -f ovnkube-db.yaml -f ovn-setup.yaml 
+  513  ovs-ofctl dump-flows br-int
+  514  ovs-ofctl dump-flows breno1
+  515  ovs-ofctl -O OpenFlow13 replace-flows breno1 /tmp/replaceme
+  516  ovs-ofctl dump-flows breno1
+  517  ping 10.8.51.53
+  518  ovs-ofctl dump-flows breno1
+  519  ping 10.8.50.55
+  520  ping 10.8.51.55
+  521  TOKEN=$(kubectl describe secret $(kubectl get secrets | grep default | cut -f1 -d ' ') | grep -E '^token' | cut -f2 -d':' | tr -d '\t')
+  522  exit
+  523  vim /etc/systemd/resolved.conf 
+  524  ip ro
+  525  ip li show
+  526  ip a show
+  527  ip ro
+  528  kubectl get pods -n ovn-kubernets
+  529  kubectl get pods -n ovn-kubernetes
+  530  kubectl exec -n ovn-kubernetes ovnkube-node-9w6jh  -c ovnkube-node -it bash
+  531  ls
+  532  git branc -l
+  533  git branch -l
+  534  kubectl get pods -n ovn-kubernetes
+  535  cd /var/log/ovn-kubernetes/
+  536  ls
+  537  grep list-dbs *
+  538  grep list-d *
+  539  grep list-db
+  540  find /var/log/pods |grep ovnkube
+  541  grep list-dbs /var/log/pods/ovn-kubernetes_ovnkube-master-54b54f69d7-g9tzh_599a7cc8-cb72-44b4-97ea-82604d77721c/ovnkube-master/0.log
+  542  grep list/var/log/pods/ovn-kubernetes_ovnkube-master-54b54f69d7-g9tzh_599a7cc8-cb72-44b4-97ea-82604d77721c/ovn-northd/0.log
+  543  grep list /var/log/pods/ovn-kubernetes_ovnkube-master-54b54f69d7-g9tzh_599a7cc8-cb72-44b4-97ea-82604d77721c/ovn-northd/0.log
+  544  grep list-dbs v
+  545  grep list-dbs /var/log/pods/ovn-kubernetes_ovnkube-node-rffp2_6c7211ce-3fdb-4355-b3f8-b5d4f63ea65b/ovnkube-node/0.log
+  546  ovs-vsctl list open
+  547  pwd
+  548  cd /var/log/ovn-kubernetes/
+  549  cd ../openvswitch/
+  550  ls
+  551  less ovn-controller.log
+  552  ip ro
+  553  ovs-vsctl list open
+  554  ovsdb-client --help
+  555  ovsdb-client --db tcp:10.8.51.51 list_dbs
+  556  ovsdb-client --db tcp:10.8.51.51:6641 list_dbs
+  557  ovs-vsctl list-ports br-int
+  558  ovs-vsctl list-ports
+  559  ovs-vsctl list open
+  560  ovs-vsctl list-ports br-int
+  561  ovn-nbctl list logical_switc
+  562  export OVN_SB_DB=tcp:10.8.51.51:6642
+  563  export OVN_NB_DB=tcp:10.8.51.51:6641
+  564  ovn-nbctl ls-list
+  565  ovn-nbctl list logical_switchb8b06492-91be-4e75-8dbc-696e36a53e4a 
+  566  ovn-nbctl list logical_switch b8b06492-91be-4e75-8dbc-696e36a53e4a 
+  567  ovn-nbctl lsp-list ext_sdn-test1
+  568  ovs-vsctl --version
+  569  ovn-nbctl list logical_switch_port 959da166-b631-4799-81c4-43ebf37fa716
+  570  ovs-vsctl list interface | less
+  571  ovs-vsctl list interface | grep iface-id
+  572  ovs-vsctl list interface | egrep 'name|iface-id'
+  573  ovs-vsctl list interface | egrep 'name|iface-id|localnet'
+  574  ovs-vsctl list interface | egrep '^name|iface-id|localnet'
+  575  ovs-vsctl list patch-breno1_sdn-test1-to-br-int
+  576  ovs-vsctl list logical_switch_port patch-breno1_sdn-test1-to-br-int
+  577  ovs-vsctl list interface patch-breno1_sdn-test1-to-br-int
+  578  ovs-vsctl list port patch-breno1_sdn-test1-to-br-int
+  579  ovn-nbctl list logical_switc_port breno1_sdn-test1
+  580  ovn-nbctl list logical_switch_port breno1_sdn-test1
+  581  ovn-nbctl lsp-list ext_sdn-test1
+  582  ovn-nbctl list logical_switch_port etor-GR_sdn-test1
+  583  ovn-nbclt lrp-list GR_sdn-test1
+  584  ovn-nbctl lrp-list GR_sdn-test1
+  585  ovn-nbctl list logical_router_port rtoj-GR_sdn-test1
+  586  ovn-sbctl list port_binding |less
+  587  ovn-nbctl list logical_switch `hostname`
+  588  cd /tmp/
+  589  vim ~/.ssh/config 
+  590  cat ~/.ssh/config 
+  591  export OVN_NB_DB=tcp:10.8.51.51:6641
+  592  export OVN_SB_DB=tcp:10.8.51.51:6642
+  593  ovn-nbctl ls-list
+  594  ovn-nbctl list logical_switch ext_sdn-test1
+  595  ovn-nbctl list logical_switch ext_sdn-test2
+  596  systemctl status ntp
+  597  systemctl status ntpd
+  598  ps -ef | grep ntp
+  599  history 
+  600  ls
+  601  vim ~/.ssh/config 
+  602  ls /root/.ssh/
+  603  vim /root/.ssh/sk-nv-gitlab
+  604  history 
+  605  history | grep CID
+  606  history | grep golan
+  607  history | grep golang
+  608  grep go h1 
+  609  grep go h1 | grep apt
+  610  vim h1
+  611  go version
+  612  grep go h1 | grep export
+  613  ls /tmp/go
+  614  ls /tmp/go/bin/
+  615  grep pkg h1
+  616  ls /tmp/go
+  617  ls /tmp/go/pkg/
+  618  ls /tmp/go/src/
+  619  ls /tmp/go/src/github.com/
+  620  which go
+  621  ls -l /usr/bin/go
+  622  ls /tmp/go/pkg/
+  623  ls /tmp/go/pkg/mod/
+  624  grep pkg h1 | grep get
+  625  /tmp/go/bin/golangci-lint --version
+  626  grep "=on"  /tmp/go -rn
+  627  ls
+  628  ls .tm
+  629  ls -ltrh /tmp/
+  630  ls okv4
+  631  cd /tmp/
+  632  ls /sys/kernel/mm/
+  633  ls /sys/kernel/mm/transparent_hugepage/
+  634  cat /sys/kernel/mm/transparent_hugepage/enabled 
+  635  lspci | grep Mel
+  636  history 
+  637  ovs-vsctl list open 
+  638  man ovn-controller
+  639  ovs-vsctl ----if-exists", "get",
+  640  ovs-vsctl --if-exists get Open_vSwitch . external_ids:ovn-encap-ip
+  641  ovs-vsctl --if-exists get Open_vSwitch . external_ids:ovn-encap-ip1
+  642  docker ps |grep ovnkube
+  643  docker exec -it a10d906b1ad0 bash
+  644  kubectl get network-polciy
+  645  apt-get whatprovides nslookup
+  646  which nslooklup
+  647  which nslookup
+  648  dpkg -S /usr/bin/nslookup
+  649  ip ro
+  650  kubectl get svc
+  651  ip a
+  652  ip r
+  653  ip a
+  654  ip r
+  655  git grep 10.64 /tmp/ovn-kubernetes-verification/ -rn
+  656  grep 10.64 /tmp/ovn-kubernetes-verification/ -rn
+  657  grep 10.64 /tmp/okv4/ -rn
+  658  grep "10.64" /tmp/okv4/ -rn
+  659  vim /tmp/ovn-kubernetes-verification/networkPolicy.yaml 
+  660  grep "100.64" /tmp/okv4/ -rn
+  661  ip ro
+  662  kubectl get pods -n ovn-kubernetes
+  663  go version
+  664  ls /usr/bin/go
+  665  ls -l /usr/bin/go
+  666  ip li show
+  667  kubectl get pods -n kube-system
+  668  kubectl get nodes
+  669  kubectl get ds -A
+  670  kubectl describe pod -n kube-system coredns-5644d7b6d9-b4lxk 
+  671  kubectl get pods -n kube-system
+  672  kubectl get pods -n kube-system -o wide
+  673  kubectl get pods -n ovn-kbuernetes
+  674  kubectl get pods -n ovn-kubernetes
+  675  find /var/log/pods |grep master
+  676  lesss /var/log/pods/ovn-kubernetes_ovnkube-master-7698d5f6f5-gvst4_d5a4d367-d073-4908-849e-d05d80d3cd10/ovnkube-master/0.log
+  677  less /var/log/pods/ovn-kubernetes_ovnkube-master-7698d5f6f5-gvst4_d5a4d367-d073-4908-849e-d05d80d3cd10/ovnkube-master/0.log
+  678  ssh root@10.8.51.53
+  679  scp -r .kube root@10.8.51.51:/root
+  680  scp -r .kube root@10.8.51.53:/root
+  681  scp -r .kube root@10.8.51.55:/root
+  682  kubectl get pods -n ovn-kubernetes
+  683  kubectl get pods -n kube-system -o wide
+  684  date
+  685  grep node-subnet /var/log/ovn-kubernetes/ovnkube-master.log 
+  686  date
+  687  cd /tmp/go/src/github.com/ovn-org/ovn-kubernetes/
+  688  ll
+  689  cd go-controller/
+  690  less pkg/cluster/node.go 
+  691  find . -type f |xargs grep 'Failed to get node'
+  692  find . -type f |xargs grep 'Failed to get node/node'
+  693  find . -type f |xargs grep -i 'Failed to get node/node'
+  694  cd ..
+  695  find . -type f |xargs grep -i 'Failed to get node/node'
+  696  find . -type f |xargs grep -i 'Failed to get %s'
+  697  find . -type f |xargs grep -i 'Failed to get node'
+  698  grep image: dist/yaml/ovnkube-node.yaml
+  699  find . -type f |xargs grep -i 'Failed to get node'
+  700  cd
+  701  cd /tmp/go/src/github.com/ovn-org/
+  702  cd ovn-kubernetes/dist/yaml/
+  703  ll
+  704  rm -f *.yaml
+  705  ll
+  706  cd
+  707  cd -
+  708  ll
+  709  cd ..
+  710  kubectl get nodes -o yaml |grep ovn.org
+  711  grep image: dist/yaml/ovnkube-node.yaml
+  712  cd ..
+  713  grep image: dist/yaml/ovnkube-node.yaml
+  714  d ..
+  715  cd ..
+  716  ll
+  717  cd ovn-kubernetes/dist/templates/
+  718  ll
+  719  vim ovnkube-node.yaml.j2 
+  720  ip li show
+  721  j2
+  722  which js2
+  723  which j2
+  724  dpkg -S j2
+  725  dpkg -S bin/j2
+  726  pip show j2
+  727  pip install j2
+  728  which j2
+  729  cd /tmp/ovn-kubernetes-verification/n
+  730  cd /tmp/ovn-kubernetes-verification/
+  731  ll
+  732  grep daemonset.sh *install*
+  733  less install-ovn-k8s.bash 
+  734  image="quay.io/nvidia/ovnkube-c"
+  735  cd /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/images/
+  736  ll
+  737  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443
+  738  e
+  739  cd ..
+  740  cd yaml/
+  741  ll
+  742  less ovnkube-node.yaml 
+  743  cd
+  744  cd -
+  745  ll
+  746  date
+  747  less ovnkube-node.yaml
+  748  diff -c ovnkube-node.yaml ovnkube-node.yaml.bak 
+  749  less ovnkube-node.yaml
+  750  kubectl --help 
+  751  ll
+  752  vi ovnkube-node.yaml
+  753  cd ../templates/
+  754  lls
+  755  vi ovnkube-node.yaml.j2 
+  756  vi ../yaml/ovnkube-node.yaml
+  757  cd -
+  758  echo $image
+  759  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443
+  760  vim ../yaml/ovnkube-node.yaml
+  761  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443 --kind
+  762  vim ../yaml/ovnkube-node.yaml
+  763  pip freeze | grep j2cli 
+  764  pip show j2cli
+  765  pip show j2
+  766  pip list j2
+  767  pip help list
+  768  pip help
+  769  vim ../templates/ovnkube-node.yaml.j2 
+  770  ll
+  771  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443 --kind
+  772  vi ../yaml/ovnkube-node.yaml
+  773  rm -f ../yaml/*
+  774  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443
+  775  vi ../yaml/ovnkube-node.yaml
+  776  cd
+  777  ll
+  778  cd /tmp/ovn-kubernetes-verification/
+  779  less install-ovn-k8s.bash 
+  780  ovs-vsctl list-br
+  781  export OVN_SB_DB=tcp:10.8.51.51:6642
+  782  export OVN_NB_DB=tcp:10.8.51.51:6641
+  783  ovn-nbctl ls-list
+  784  ovn-nbctl lr-list
+  785  cd -
+  786  cd /tmp/go/src/github.com/ovn-org/ovn-kubernetes/go-controller/
+  787  ll
+  788  cd ../dist/images/
+  789  image=quay.io/sklein/ovn-kube-u:c9153fb1a3dd
+  790  echo $image
+  791  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443
+  792  less ../yaml/ovnkube-node.yaml.bak 
+  793  grep image: ../yaml/ovnkube-node.yaml.bak 
+  794  vim ../templates/ovnkube-node.yaml.j2 
+  795  vu daemonset.s
+  796  vi daemonset.sh 
+  797  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443
+  798  which j2
+  799  j2 --help
+  800  ovn_image=quay.io/sklein/ovn-kube-u:c9153fb1a3dd
+  801  ovn_image_pull_policy=IfNotPresent
+  802  kind=
+  803  ovn_gateway_mode=shared
+  804  ovn_gateway_opts=
+  805  j2 -d ../templates/ovnkube-node.yaml.j2 -o ../yaml/ovnkube-node.yaml
+  806  j2 -d ../templates/ovnkube-node.yaml.j2
+  807  j2 -d ../templates/ovnkube-node.yaml.j2 |grep image:
+  808  echo $ovn_image
+  809  vim ../templates/ovnkube-node.yaml.j2 
+  810  j2 -d ../templates/ovnkube-node.yaml.j2 |grep image:
+  811  vim ../templates/ovnkube-node.yaml.j2 
+  812  echo $ovn_image
+  813  export OVN_NB_DB=tcp:10.8.51.51:6641
+  814  export OVN_SB_DB=tcp:10.8.51.51:6642
+  815  ovn-nbctl ls-list
+  816  pwd
+  817  cd /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/images/
+  818  vim daemonset.sh 
+  819  cd /tmp/
+  820  vim foo.sh
+  821  cd /tmp/
+  822  j2
+  823  vim foo.yaml.j2
+  824  j2 foo.yaml.j2 
+  825  foo=DDD j2 foo.yaml.j2
+  826  which j2
+  827  dpkg -S /usr/local/bin/j2
+  828  man j2
+  829  js --help
+  830  j2 --help
+  831  j2 -d  foo.yaml.j2 
+  832  cat  foo.yaml.j2 
+  833  j2 -e'foo=foo' foo.yaml.j2 
+  834  j2 -e'foo="foo"' foo.yaml.j2 
+  835  bash foo.
+  836  bash foo.sh 
+  837  vim foo.yaml.j2 
+  838  bash foo.sh 
+  839  vim foo.yaml.j2 
+  840  bash foo.sh 
+  841  cat foo.yaml.j2 
+  842  cat foo.sh 
+  843  bash foo.sh 
+  844  cat foo.yaml
+  845  ip ro
+  846  cd /tmp/go/src/github.com/ovn-org/ovn-kubernetes/
+  847  ll
+  848  cd go-controller/
+  849  ll
+  850  j2 --help
+  851  cd
+  852  cd -
+  853  cd ../dist/images/
+  854  ll
+  855  vim daemonset.sh 
+  856  image="quay.io/nvidia/ovnkube-c"
+  857  image="quay.io/nvidia/ovnkube-c:1241412"
+  858  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443
+  859  vim daemonset.sh 
+  860  j2 --help
+  861  j2 --info
+  862  vim daemonset.sh 
+  863  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443
+  864  vim daemonset.sh 
+  865  vi daemonset.sh 
+  866  ./daemonset.sh --image=$image --mtu=1440 --net-cidr=192.168.0.0/16 --svc-cidr=10.100.0.0/16 --gateway-mode="shared" --k8s-apiserver=https://10.8.51.51:6443
+  867  vim daemonset.sh 
+  868  j2 --version
+  869  jw version
+  870  j2 --help
+  871  j2 --version
+  872  j2 version
+  873  vi test.yaml.j2
+  874  cd
+  875  vi /tmp/test.yaml.j2
+  876  name=Andrew age=32 j2 ./test.yaml.j2
+  877  cd /tmp
+  878  name=Andrew age=32 j2 ./test.yaml.j2
+  879  pip list |grep j2cli
+  880  pip remove j2
+  881  pip rm j2
+  882  pip --help j2
+  883  pip uninstall j2
+  884  pip install j2cli
+  885  updatedb
+  886  locate 'bin/j2'
+  887  /root/.local/bin/j2 
+  888  name=Andrew age=32 /root/.local/bin/j2 ./test.yaml.j2
+  889  less /tmp/ovn-kubernetes-verification/install-ovn-k8s.bash 
+  890  pip freeze | grep j2cli || pip install j2cli[yaml] --user
+  891  pip uninstall j2cli
+  892  pip install --help 
+  893  p/--user
+  894  cd
+  895  pip freeze | grep j2cli || pip install j2cli[yaml]
+  896  updatedb
+  897  locate 'bin/j2'
+  898  pip uninstall j2cli
+  899  exit
+  900  go version
+  901  ip a
+  902  vim /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/ovnkube-node.yaml
+  903  ls
+  904  vim /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/images/daemonset.sh 
+  905  cp /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/images/daemonset.sh /tmp/
+  906  cd /tmp/
+  907  cp daemonset.sh daemonset.sh.before
+  908  vim daemonset.sh
+  909  diff -u daemonset.sh.before daemonset.sh
+  910  kubectl version
+  911  kubectl get nodes
+  912  vim def-pod.yaml
+  913  kubectl create -f def-pod.yaml 
+  914  kubectl get pods
+  915  vim nPolicy.yaml
+  916  kubectl exec -it ub-pod -- ping 8.8.8.8
+  917  kubectl apply -f nPolicy.yaml 
+  918  kubectl describe networkPolicy 
+  919  kubectl exec -it ub-pod -- ping 8.8.8.8
+  920  vim def-pod.yaml 
+  921  cp def-pod.yaml pod.yaml
+  922  vim pod.yaml 
+  923  kubectl delete -f def-pod.yaml 
+  924  kubectl create -f pod.yaml 
+  925  kubectl describe pod ub
+  926  :q
+  927  vim nPolicy.yaml
+  928  kubectl delete -f nPolicy.yaml 
+  929  kubectl describe networkPolicy 
+  930  kubectl apply -f nPolicy.yaml 
+  931  kubectl describe networkPolicy 
+  932  kubectl exec -it ub -- ping 8.8.8.8
+  933  vim pod.yaml 
+  934  vim nPolicy.yaml
+  935  kubectl exec -it ub -- ping 8.8.8.8
+  936  kubectl describe networkPolicy 
+  937  kubectl delete -f pod.yaml 
+  938  kubectl delete -f nPolicy.yaml 
+  939  kubectl apply  -f nPolicy.yaml 
+  940  kubectl delete -f nPolicy.yaml 
+  941  kubectl apply  -f nPolicy.yaml 
+  942  kubectl delete -f nPolicy.yaml 
+  943  kubectl apply  -f nPolicy.yaml 
+  944  ls /var/log/pods/
+  945  tail -f /var/log/pods/ovn-kubernetes_ovnkube-master-76599dc888-rcwxb_abcbab07-c832-4891-83e6-0d9de5c0bf80/ovnkube-master/0.log 
+  946  tail -f /var/log/pods/ovn-kubernetes_ovnkube-master-76599dc888-rcwxb_abcbab07-c832-4891-83e6-0d9de5c0bf80/ovn-northd/0.log 
+  947  tail -f /var/log/pods/ovn-kubernetes_ovnkube-master-76599dc888-rcwxb_abcbab07-c832-4891-83e6-0d9de5c0bf80/nbctl-daemon/0.log 
+  948  cd /tmp/ovn-kubernetes-verification/
+  949  vim install-ovn-k8s.bash 
+  950  cd ../
+  951  cp -R ovn-kubernetes-verification okv5
+  952  vim okv5/install-ovn-k8s.bash 
+  953  cd okv5/
+  954  vim install-ovn-k8s.bash 
+  955  vim common.sh 
+  956  git grep vm_scp
+  957  vim common.sh 
+  958  vim install-ovn-k8s.bash 
+  959  git diff
+  960  git add install-ovn-k8s.bash 
+  961  git commit -m "Add a test to verify daemonset creation succeeded."
+  962  git push
+  963  ls /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/
+  964  grep image /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/
+  965  grep image /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/*
+  966  grep image /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep latest
+  967  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep latest
+  968  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | | grep -v ovnkube-db-vip | grep latest
+  969  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep latest
+  970  echo $?
+  971  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep latest || echo pas
+  972  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep latest || echo pasd
+  973  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep latest || echo pass
+  974  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep im || echo pass
+  975  echo $?
+  976  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep im || echo "Found directive to latest image"
+  977  echo $?
+  978  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep im || echo "Found directive to latest image" | exit 1
+  979  echo $?
+  980  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep latest || echo "Found directive to latest image" | exit 1
+  981  grep latest /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/templates/*
+  982  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep latest || echo "Found directive to latest image" 
+  983  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep latest && echo "Found directive to latest image" 
+  984  echo $?
+  985  grep image: /tmp/go/src/github.com/ovn-org/ovn-kubernetes/dist/yaml/* | grep -v ovnkube-db-vip | grep latest && echo "Found directive to latest image" 
+  986  bash /tmp/okv5/install-ovn-k8s.bash e14fe695 MERGE nv-ovn-kubernets ssh://git@gitlab-master.nvidia.com:12051/sdn/ovn-kubernetes.git ubuntu
+  987  ip ro
+  988  which j2
+  989  cd ~/.local/bin/
+  990  ll
+  991  exit
+  992  ovs-vsctl list open
+  993  ovs-vsctl get Open_vSwitch . external_ids:ovn-encap-ip
+  994  ovs-vsctl --data=bare get Open_vSwitch . external_ids:ovn-encap-ip
+  995  ovs-vsctl list open |grep external_ids
+  996  cd /tmp/ovn-kubernetes-verification/
+  997  kubectl get network-polciy
+  998  kubectl get networkPolciy
+  999  vim install-ovn-k8s.bash 
+ 1000  kubectl label namespace kube-system name=kube-system --overwrite
+ 1001  kubectl describe namespace kube-system
+ 1002  kubectl get nodes
+ 1003  kubectl describe sdn-test1 
+ 1004  kubectl describe node sdn-test1 
+ 1005  kubectl describe node sdn-test1 | grep kube-system
+ 1006  kubectl describe networkPolicy access-web
+ 1007  kubectl describe networkPolicy
+ 1008  kubectl -n ovn-kubernete
+ 1009  kubectl -n ovn-kubernetes get pods
+ 1010  kubectl -n ovn-kubernetes logs ovnkube-master-55dc875f9b-gqjls | grep acl | grep namespace
+ 1011  kubectl -n ovn-kubernetes logs ovnkube-master-55dc875f9b-gqjls -c ovnkube-master | grep acl | grep namespace
+ 1012  kubectl -n ovn-kubernetes logs ovnkube-master-55dc875f9b-gqjls -c ovnkube-master | grep port_group
+ 1013  kubectl describe networkPolicy
+ 1014  cat /etc/hosts
+ 1015  ip li show
+ 1016  ip ro
+ 1017  ip a sow
+ 1018  ip nei show
+ 1019  ping -I breno1 192.168.0.2
+ 1020  ping -I breno1 192.168.0.1
+ 1021  ip nei del 192.168.0.1 dev k8s-sdn-test1 
+ 1022  ip nei show |grep 192.168.0.1
+ 1023  ping -I breno1 192.168.0.1
+ 1024  ping 192.168.0.1
+ 1025  ip nei show
+ 1026  ip nei del 192.168.0.1 dev k8s-sdn-test1 
+ 1027  ip nei show
+ 1028  ping 192.168.0.1
+ 1029  ip nei show
+ 1030  ip nei del 192.168.0.1 dev k8s-sdn-test1 
+ 1031  nc -zv 192.168.0.1
+ 1032  ip or
+ 1033  ip ro
+ 1034  nc -zv 10.100.0.1 443
+ 1035  k get nodes
+ 1036  kubectl get nodes
+ 1037  kubectl get nodes -o wide
+ 1038  kubectl get pods -o wide
+ 1039  kubectl get pods -n ovn-kubernetes
+ 1040  kubectl get pods -n ovn-kubernetes -o wide
+ 1041  ovs-vsctl list-br
+ 1042  exit
+ 1043  ip li show
+ 1044  ip nei show
+ 1045  tcpdump -enni k8s-sdn-test1 icmp
+ 1046  tcpdump -enni k8s-sdn-test1 arp
+ 1047  exit
+ 1048  vim /etc/hosts
+ 1049  kubectl get pods --show-labels
+ 1050  kubectl get nodes --show-labels
+ 1051  vim /etc/hosts
+ 1052  file /lib/modules/4.15.0-51-generic/modules.dep.bin 
+ 1053  file /lib/modules/4.15.0-51-generic/modules.dep
+ 1054  cd /tmp/
+ 1055  cp -r okv5 okv6
+ 1056  cd okv6
+ 1057  git pull
+ 1058  cd /tmp/okv6/
+ 1059  vim install-ovn-k8s.bash 
+ 1060  /tmp/okv6/install-ovn-k8s.bash 639faabccb70 PUSH master ssh://git@gitlab-master.nvidia.com:12051/sdn/ovn-kubernetes.git
+ 1061  bash /tmp/okv6/install-ovn-k8s.bash 639faabccb70 PUSH master ssh://git@gitlab-master.nvidia.com:12051/sdn/ovn-kubernetes.git
+ 1062  cd /tmp/
+ 1063  git clone ssh://git@gitlab-master.nvidia.com:12051/sdn/ovn-kubernetes.git
+ 1064  ping gitlab-master.nvidia.com
+ 1065  pip
+ 1066  which pip
+ 1067  dpkg -S /usr/bin/pip
+ 1068  vim ~/.ssh/config 
+ 1069  cd /tmp/
+ 1070  git clone ssh://git@gitlab-master.nvidia.com:12051/sdn/ovn-kubernetes.git
+ 1071  ls -l
+ 1072  cd git/
+ 1073  ls
+ 1074  ls sk-ovn-k8s/
+ 1075  cd sk-ovn-k8s/
+ 1076  ls
+ 1077  git remote -v
+ 1078  git diff
+ 1079  cd ../
+ 1080  ls
+ 1081  ls tools/
+ 1082  vim ~/.bashrc
+ 1083  cat ~/.ssh/config 
+ 1084  ip li show
+ 1085  ip ro
+ 1086  ip a sow
+ 1087  ip a show
+ 1088  cd git/
+ 1089  cd poorspray/
+ 1090  git diff
+ 1091  cp inventory/basic/hosts /tmp/
+ 1092  git stash
+ 1093  git pull
+ 1094  diff -u inventory/basic/hosts /tmp/
+ 1095  git grep ovn_encap_ip
+ 1096  vim inventory/basic/hosts 
+ 1097  git diff
+ 1098  git stash
+ 1099  git pull
+ 1100  git stash pop
+ 1101  vim inventory/basic/hosts 
+ 1102  vim inventory/basic/hosts.sjc3 
+ 1103  git diff
+ 1104  cp inventory/basic/hosts.sjc3 /tmp/
+ 1105  git stash
+ 1106  vim inventory/basic/hosts.sjc3 
+ 1107  cp /tmp/hosts.sjc3 inventory/basic/hosts.Rlab
+ 1108  git add inventory/basic/hosts.Rlab
+ 1109  vim inventory/basic/hosts.Rlab
+ 1110  cd git/poorspray/
+ 1111  ansible -i inventory/basic/hosts.Rlab all -m ping
+ 1112  ls ~/.ssh/
+ 1113  cat ~/.ssh/authorized_keys 
+ 1114  ssh root@10.8.51.55
+ 1115  vim /root/.ssh/known_hosts +9
+ 1116  ssh root@10.8.51.55
+ 1117  ansible -i inventory/basic/hosts.Rlab all -m ping
+ 1118  ansible-galaxy init reset
+ 1119  ls roles/
+ 1120  ls roles/kubernetes/
+ 1121  git status
+ 1122  ls
+ 1123  rm -rf reset/
+ 1124  cd roles/
+ 1125  ls
+ 1126  ansible-galaxy init reset
+ 1127  ls
+ 1128  vim ~/.ssh/config 
+ 1129  vim /etc/ssh/ssh_config 
+ 1130  vim /etc/ssh/sshd_config 
+ 1131  man sshd_config
+ 1132  vim /etc/ssh/sshd_config 
+ 1133  man sshd_config
+ 1134  vim /etc/ssh/ssh_config 
+ 1135  vim /etc/ssh/sshd_config 
+ 1136  systemctl restart ssh
+ 1137  cd git/poorspray/
+ 1138  vim try-stuff.yaml
+ 1139  ansible-playbook -i inventory/basic/hosts.Rlab -l "sdn-test3"
+ 1140  ansible-playbook -i inventory/basic/hosts.Rlab try-stuff.yaml -l "sdn-test3"
+ 1141  vim try-stuff.yaml
+ 1142  vim roles/reset/templates/ifcfg.j2
+ 1143  ls
+ 1144  git status
+ 1145  ls -ltrh
+ 1146  vim reset.yaml
+ 1147  cd git/poorspray/
+ 1148  vim ~/.bashrc 
+ 1149  source ~/.bashrc
+ 1150  ansible -i inventory/basic/hosts.Rlab all -m ping
+ 1151  vim reset.yaml 
+ 1152  vim cluster.yaml 
+ 1153  git diff
+ 1154  vim cluster.yaml 
+ 1155  git grep resourceList
+ 1156  git grep sriov_resource_game_server
+ 1157  vim roles/kubernetes/network-plugin/tasks/main.yml
+ 1158  git grep rangeStart
+ 1159  ls roles/kubernetes/network-plugin/templates
+ 1160  vim cluster.yaml 
+ 1161  git status
+ 1162  git add -u
+ 1163  git status
+ 1164  git commit -m"WIP"
+ 1165  git push
+ 1166  git grep fstab
+ 1167  vim roles/kubernetes/host-common/tasks/centos-common.yaml
+ 1168  git grep route
+ 1169  vim roles/kubernetes/host-common/tasks/centos-common.yaml
+ 1170  git status
+ 1171  git add -u
+ 1172  git commit -m"WIP"
+ 1173  git push
+ 1174  ls
+ 1175  ls ../
+ 1176  ls -l ../
+ 1177  ls -l ../sk-ovn-k8s/
+ 1178  cd ../sk-ovn-k8s/
+ 1179  git diff
+ 1180  git remote -v
+ 1181  history 
+ 1182  cd -
+ 1183  history > h2
