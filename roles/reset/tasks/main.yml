@@ -20,6 +20,7 @@
     name: network-scripts
     state: latest
   become: yes
+  ignore_errors: yes
 
 
 
@@ -42,6 +43,7 @@
 - name: Reset | Add default route
   shell: ip r add default via 10.8.48.1 dev eno1
   #BUG: need to build it generic
+  ignore_errors: yes
 
 - name: Clean ovs bridges
   shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br
@@ -61,7 +63,7 @@
     - absent
     - directory
 
-- name: Clean ovs old db
+- name: Reset | Clean ovs old db
   file:
     state: "{{ item }}"
     path: "/etc/openvswitch"
@@ -70,10 +72,41 @@
     - directory
   tags: reset
 
-- name: remove ovs
+- name: reset | stop services
+  systemd:
+    state: stopped
+    enabled: no
+    name: "{{ item }}"
+  loop: [ 'openvswitch', 'docker', 'kubelet' ]
+  ignore_errors: true
+
+- name: Reset | clear repos files identify
+  find:
+    paths: /etc/yum.repos.d
+    excludes: CentOS*
+  register: repos_to_delete
+  tags: d7
+
+- name: debug
+  debug:
+     msg: "{{ item.path }}" 
+  with_items: "{{ repos_to_delete.files }}"
+  tags: d8
+
+
+
+- name: Reset | clear repos
+  file: 
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ repos_to_delete.files }}"
+  tags: d7
+
+- name: Reset | remove ovs, docker, kubernetes
   package:
     name: "{{ item }}"
     state: absent
-  loop: [ 'openvswitch']
+  loop: [ 'openvswitch', 'kubeadm', 'kubelet', 'docker-ce' ]
+  ignore_errors: true
   tags: reset
 
