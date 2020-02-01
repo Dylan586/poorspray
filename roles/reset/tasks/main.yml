@@ -20,7 +20,6 @@
   package:
     name: network-scripts
     state: latest
-    enabled: yes
   become: yes
   ignore_errors: yes
 
@@ -40,6 +39,7 @@
 - name: run network-scripts
   systemd:
     state: restarted
+    enabled: yes
     name: network
 
 - name: Reset | Add default route
