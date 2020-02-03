@@ -26,6 +26,7 @@ ovn_gateway_opts: ""
 any_errors_fatal: true
 
 cluster_default_route: 10.8.48.1
+ovn_encap_ip_prefix: 22
 cluster_dns1: 8.8.8.8
 cluster_dns2: 103.247.36.36
 
