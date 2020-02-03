@@ -1,0 +1,25 @@
+[all]
+#nd-sjc3a-c18-cpu-06    ansible_host=10.0.2.18
+#nd-sjc3a-c18-cpu-09    ansible_host=10.0.2.21
+#nd-sjc3a-c18-cpu-12    ansible_host=10.0.2.24
+
+sdn-test1       ansible_host=10.8.51.51 ovn_encap_ip=10.8.51.51 ovn_encap_dev=eno1
+sdn-test2       ansible_host=10.8.51.53 ovn_encap_ip=10.8.51.53 ovn_encap_dev=eno1
+sdn-test3       ansible_host=10.8.51.55 ovn_encap_ip=10.8.51.55 ovn_encap_dev=eno1
+
+
+[kube-master]
+sdn-test1
+
+[kube-node]
+sdn-test2
+sdn-test3
+
+[game-hosts]
+sdn-test2
+sdn-test3
+
+[k8s-cluster:children]
+kube-master
+kube-node
+
