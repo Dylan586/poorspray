@@ -10,11 +10,22 @@ sriov_devices:
 
 game_server_sriov_stream_pf: ens1 
 
-node-09_stream_range_start: 10.1.12.121
-node-09_stream_range_end: 10.1.12.140
-node-12_stream_range_start: 10.1.12.141
-node-12_stream_range_end: 10.1.12.160
+#node-09_stream_range_start: 10.1.12.121
+#node-09_stream_range_end: 10.1.12.140
+#node-12_stream_range_start: 10.1.12.141
+#node-12_stream_range_end: 10.1.12.160
+sdn-test2_stream_range_start: 10.1.12.121
+sdn-test2_stream_range_end: 10.1.12.140
+sdn-test3_stream_range_start: 10.1.12.141
+sdn-test3_stream_range_end: 10.1.12.160
 
 #ovn_gateway_opts: "--gateway-interface=brenp175s0 --gateway-nexthop=10.50.55.1"
 ovn_gateway_opts: ""
+
+
+any_errors_fatal: true
+
+cluster_default_route: 10.8.48.1
+cluster_dns1: 8.8.8.8
+cluster_dns2: 103.247.36.36
 

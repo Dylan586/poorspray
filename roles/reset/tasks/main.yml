@@ -3,6 +3,13 @@
 #
 #
 
+- name: Install network-scripts
+  package:
+    name: network-scripts
+    state: latest
+  become: yes
+  ignore_errors: yes
+
 - name: Stop NetworkManager
   systemd:
     state: stopped
@@ -15,13 +22,8 @@
     name: NetworkManager
     state: absent
   become: yes
-
-- name: Install network-scripts
-  package:
-    name: network-scripts
-    state: latest
-  become: yes
   ignore_errors: yes
+
 
 
 
@@ -42,13 +44,8 @@
     enabled: yes
     name: network
 
-- name: Reset | Add default route
-  shell: ip r add default via {{ cluster_default_route }} dev {{ ovn_encap_dev }}
-  #BUG: need to build it generic
-  ignore_errors: yes
-
 - name: Clean ovs bridges
-  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br
+  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br && systemctl restart network
   args:
     warn: false
   ignore_errors: true

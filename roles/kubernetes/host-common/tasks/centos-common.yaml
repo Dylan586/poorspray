@@ -55,11 +55,6 @@
     state: restarted
     name: network
 
-- name: Reset | Add default route
-  shell: ip r add default via {{ cluster_default_route }} dev br{{ ovn_encap_dev }} 
-  #BUG: need to build it generic
-
-
 - name: Remove swapfile from /etc/fstab
   mount:
     name: "{{ item }}"

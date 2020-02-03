@@ -7,6 +7,9 @@ ONBOOT=yes
 TYPE=OVSBridge
 IPADDR={{ ovn_encap_ip }}
 PREFIX={{ ovn_encap_ip_prefix }}
+GATEWAY={{ cluster_default_route }}
+DNS1={{ cluster_dns1 }}
+DNS2={{ cluster_dns2 }}
 #OVSBOOTPROTO=dhcp
 #OVSDHCPINTERFACES={{ ovn_encap_dev }}
 OVS_EXTRA="set bridge br{{ ovn_encap_dev }} other-config:hwaddr={{ ovn_encap_dev_hw_addr }}"
