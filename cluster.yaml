@@ -20,10 +20,6 @@
   gather_facts: false
   roles: 
     - role: kubernetes/host-common
-      vars:
-        kubernetes_version: 1.16.3-00
-        ubuntu_nv_ovs_curl: curl -s https://2d0158bd54acb8195b4b8cc465e2ad839865f45dd45efcd5:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-12-0/script.deb.sh | bash
-        centos_nv_ovs_curl: curl -s https://dde5dee3fddef955ebe8f8b548882e19180dfe1d9386e46c:@packages.nvidia.com/install/repositories/sdn/centos8-2-12-0-1/script.rpm.sh | os=el dist=7  bash
   tags: install-stuff
 
 
@@ -32,8 +28,8 @@
   roles: 
     - role: kubernetes/master
       vars: 
-        pod_network_cidr: "{{ pod_network_cidr }}"
-        service_cidr: "{{ service_cidr }}"
+        pod_network_cidr: "{{ pods_network_cidr }}"
+        service_cidr: "{{ cluster_service_cidr }}"
   tags: set-master
 
 - hosts: kube-node
@@ -50,9 +46,8 @@
   roles: 
     - role: kubernetes/network-plugin
       vars: 
-        net_cidr: "{{ pod_network_cidr }}"
-        svc_cidr: "{{ service_cidr }}"
-        nv_k8s_yamls_version: devel
+        net_cidr: "{{ pods_network_cidr }}"
+        svc_cidr: "{{ cluster_service_cidr }}"
   tags: network
 
 
