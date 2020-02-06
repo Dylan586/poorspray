@@ -8,25 +8,51 @@
     enabled: no
     name: firewalld
 
+- name: OVS Pre-task | install python-six | Download
+  get_url:
+    url:  https://rpmfind.net/linux/centos/7.7.1908/os/x86_64/Packages/python-six-1.9.0-2.el7.noarch.rpm
+    dest: /tmp
+  become: yes
+
+- name: OVS Pre-task | install python-six
+  shell: yum -y localinstall /tmp/python-six-1.9.0-2.el7.noarch.rpm
+  args:
+    warn: false
+
+
 - name: set nv ovs repo
   shell: "{{ centos_nv_ovs_curl }}"
   args:
     warn: false
-  tags: ovs
+  tags: ovs1
 
-- name: install ovs | Download 
-  shell: yumdownloader openvswitch 
-  tags: ovs
+- name: Install OVS
+  package:
+    name: openvswitch-2.12.0-2
+    state: present
+  tags: ovs1
 
-- name: install ovs | rpm
-  shell: rpm -ivh --nodeps openvswitch-2.12.0-1.x86_64.rpm
-  tags: ovs
+#- name: install ovs | Download 
+#  shell: yumdownloader openvswitch 
+#  tags: ovs
+#
+#- name: install ovs | rpm
+#  shell: rpm -ivh --nodeps openvswitch-2.12.0-1.x86_64.rpm
+#  tags: ovs
+
+- name: reload ovs
+  systemd:
+    state: reloaded
+    name: openvswitch
+    enabled: yes
+  tags: ovs1
 
 - name: run ovs
   systemd:
     state: restarted
     name: openvswitch
-  tags: ovs
+    enabled: yes
+  tags: ovs1
 
 - name: Set ifcfg
   template:
