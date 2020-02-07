@@ -5,27 +5,20 @@
 - debug:
     msg: "DEBUG {{ playbook_dir }} {{ inventory_hostname }}  {{ inventory_hostname_short }}"
 
-- name: Network | Download nv-k8s multus yamls
-  shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/multus/{{ item }}
-  with_items:
-    - multus.yaml
-    - sriov-public-net-crd.yaml
-    - sriov-storage-net-crd.yaml
-    - sriov-stream-net-crd.yaml
-  delegate_to: localhost
-  run_once: true
-
-
 - name: Handle nv-k8s-yamls
   import_tasks: handle-nv-k8s-yamls.yaml
   tags: nv-k8s-yamls
 
-- name: Network | | Cleanup | delete sriov device plugin
+- name: Network | Cleanup | delete sriov device plugin
   shell: kubectl delete -f {{ network_deploy_dir }}/{{ item }}
   ignore_errors: true
+  no_log: true
+  args:
+    warn: false
   with_items:
     - sriov-dp.yaml
   when: is_kube_master
+  tags: network-clean
 
 - name: Network | Cleanup | delete ovn-k8s
   shell: kubectl delete -f {{ network_deploy_dir }}/{{ item }}
@@ -39,6 +32,7 @@
     - ovnkube-db.yaml
     - ovn-setup.yaml
   when: is_kube_master
+  tasg: network-clean
 
 - name: Network | Cleanup | delete Multus
   shell: kubectl delete -f {{ network_deploy_dir }}/{{ item }}
@@ -49,6 +43,7 @@
   with_items:
     - multus.yaml
   when: is_kube_master
+  tags: network-clean
 
 - name: Network | Zeroize SRIOV
   shell: echo 0 > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
