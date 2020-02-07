@@ -46,7 +46,7 @@ spec:
 
       # nb-ovsdb - v3
       - name: nb-ovsdb
-        image: "quay.io/nvidia/ovnkube-u:172b3c761306"
+        image: "quay.io/nvidia/ovnkube-u:fa4bff2dfab2"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "nb-ovsdb"]
@@ -103,7 +103,7 @@ spec:
 
       # sb-ovsdb - v3
       - name: sb-ovsdb
-        image: "quay.io/nvidia/ovnkube-u:172b3c761306"
+        image: "quay.io/nvidia/ovnkube-u:fa4bff2dfab2"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "sb-ovsdb"]

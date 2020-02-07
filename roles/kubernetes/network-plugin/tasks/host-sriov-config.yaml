@@ -1,0 +1,19 @@
+---
+- name: Network | ovn-k8s | Copy templates of game host sriov config
+  template:
+    src: "{{ item }}"
+    dest: /etc/pcidp/config.json
+    force: yes
+  with_items:
+    - sriov_resource_game_server.json.j2
+  when: is_game_host
+
+- name: Network | ovn-k8s | Copy templates of game host sriov cni conf
+  template:
+    src: "{{ item }}"
+    dest: /etc/cni/net.d/{{ item }}
+    force: yes
+  with_items:
+    - 10-sriov_net.conf
+  when: is_game_host
+
