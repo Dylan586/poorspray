@@ -32,7 +32,7 @@
     - ovnkube-db.yaml
     - ovn-setup.yaml
   when: is_kube_master
-  tasg: network-clean
+  tags: network-clean
 
 - name: Network | Cleanup | delete Multus
   shell: kubectl delete -f {{ network_deploy_dir }}/{{ item }}
