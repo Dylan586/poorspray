@@ -28,7 +28,7 @@
 
 - name: Install OVS
   package:
-    name: openvswitch-2.12.0-2
+    name: openvswitch-{{ ovs_version }}
     state: present
   tags: ovs1
 
