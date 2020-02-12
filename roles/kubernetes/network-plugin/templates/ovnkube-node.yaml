@@ -38,7 +38,7 @@ spec:
       containers:
 
       - name: ovn-controller
-        image: "quay.io/nvidia/ovnkube-u:fa4bff2dfab2"
+        image: "quay.io/nvidia/ovnkube-u:f9933f3775e0"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-controller"]
@@ -108,7 +108,7 @@ spec:
         lifecycle:
 
       - name: ovnkube-node
-        image: "quay.io/nvidia/ovnkube-u:fa4bff2dfab2"
+        image: "quay.io/nvidia/ovnkube-u:f9933f3775e0"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-node"]
@@ -117,7 +117,6 @@ spec:
           runAsUser: 0
           capabilities:
             add: ["NET_ADMIN"]
-          
 
         volumeMounts:
         # for the iptables wrapper
@@ -141,7 +140,6 @@ spec:
           name: host-opt-cni-bin
         - mountPath: /etc/cni/net.d
           name: host-etc-cni-netd
-        
 
         resources:
           requests:
@@ -224,10 +222,5 @@ spec:
       - name: host-slash
         hostPath:
           path: /
-      - name: host-config-openvswitch
-        hostPath:
-          path: /etc/origin/openvswitch
-      
-
       tolerations:
       - operator: "Exists"

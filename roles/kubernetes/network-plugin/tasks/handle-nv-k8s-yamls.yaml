@@ -36,7 +36,10 @@
 - name: Network | Creates the deployment directory
   file:
     path: "{{ network_deploy_dir }}"
-    state: directory
+    state: "{{ item }}"
+  with_items:
+    - absent
+    - directory
   delegate_to: localhost
   run_once: true
 

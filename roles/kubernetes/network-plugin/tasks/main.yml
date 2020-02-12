@@ -73,7 +73,7 @@
     - ovnkube-node.yaml
   when: is_kube_master
 
-- name: Network | Creates the sriov dp config directory
+- name: Network | Create the sriov dp config directory
   file:
     path: /etc/pcidp
     state: directory
