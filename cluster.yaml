@@ -43,8 +43,7 @@
   roles: 
     - role: kubernetes/network-plugin
       vars: 
-        K8S_apiserver_address: "10.8.51.51"
-        #K8S_apiserver_address: "{{ groups['kube-master'][0] }}"
+        K8S_apiserver_address: "{{ hostvars[groups['kube-master'][0]].ansible_host }}"
         net_cidr: "{{ pods_network_cidr }}"
         svc_cidr: "{{ cluster_service_cidr }}"
   tags: network
