@@ -12,6 +12,7 @@
   get_url:
     url:  https://rpmfind.net/linux/centos/7.7.1908/os/x86_64/Packages/python-six-1.9.0-2.el7.noarch.rpm
     dest: /tmp
+    validate_certs: no
   become: yes
 
 - name: OVS Pre-task | install python-six
@@ -32,7 +33,7 @@
     state: present
   with_items: 
     - openvswitch-{{ ovs_version }}
-    - network-scripts-openvswitch-{{ ovs_version }}
+      #- network-scripts-openvswitch-{{ ovs_version }}
   tags: ovs1
 
 #- name: install ovs | Download 
