@@ -58,7 +58,7 @@ spec:
         - name: log
           mountPath: /var/log
         - name: config-volume
-          mountPath: /etc/pcidp
+          mountPath: /etc/pcidp/config.json
       volumes:
         - name: devicesock
           hostPath:
@@ -68,5 +68,6 @@ spec:
             path: /var/log
         - name: config-volume
           hostPath:
-            path: /etc/pcidp
+            path: /etc/pcidp/config.json
+            type: File
 

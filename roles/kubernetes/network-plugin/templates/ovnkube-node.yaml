@@ -38,7 +38,7 @@ spec:
       containers:
 
       - name: ovn-controller
-        image: "quay.io/nvidia/ovnkube-u:f9933f3775e0"
+        image: "quay.io/nvidia/ovnkube-u:f604eee0767e"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-controller"]
@@ -48,6 +48,7 @@ spec:
           capabilities:
             add: ["SYS_NICE"]
 
+        terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - mountPath: /var/run/dbus/
           name: host-var-run-dbus
@@ -68,47 +69,25 @@ spec:
         env:
         - name: OVN_DAEMONSET_VERSION
           value: "3"
-        - name: OVNKUBE_LOGLEVEL
-          value: "4"
-        - name: OVN_NET_CIDR
-          valueFrom:
-            configMapKeyRef:
-              name: ovn-config
-              key: net_cidr
-        - name: OVN_SVC_CIDR
-          valueFrom:
-            configMapKeyRef:
-              name: ovn-config
-              key: svc_cidr
         - name: K8S_APISERVER
           valueFrom:
             configMapKeyRef:
               name: ovn-config
               key: k8s_apiserver
-        - name: K8S_NODE
-          valueFrom:
-            fieldRef:
-              fieldPath: spec.nodeName
         - name: OVN_KUBERNETES_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
 
-        ports:
-        - name: healthz
-          containerPort: 10258
-        # TODO: Temporarily disabled until we determine how to wait for clean default
-        # config
-        # livenessProbe:
-        #   initialDelaySeconds: 10
-        #   httpGet:
-        #     path: /healthz
-        #     port: 10258
-        #     scheme: HTTP
-        lifecycle:
+        readinessProbe:
+          exec:
+            command: ["/usr/bin/ovn-kube-util", "readiness-probe", "-t", "ovn-controller"]
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+          periodSeconds: 60
 
       - name: ovnkube-node
-        image: "quay.io/nvidia/ovnkube-u:f9933f3775e0"
+        image: "quay.io/nvidia/ovnkube-u:f604eee0767e"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "ovn-node"]
@@ -117,7 +96,9 @@ spec:
           runAsUser: 0
           capabilities:
             add: ["NET_ADMIN"]
+          
 
+        terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         # for the iptables wrapper
         - mountPath: /host
@@ -140,6 +121,7 @@ spec:
           name: host-opt-cni-bin
         - mountPath: /etc/cni/net.d
           name: host-etc-cni-netd
+        
 
         resources:
           requests:
@@ -179,21 +161,16 @@ spec:
         - name: OVN_GATEWAY_OPTS
           value: ""
 
-        ports:
-        - name: healthz
-          containerPort: 10259
-        # TODO: Temporarily disabled until we determine how to wait for clean default
-        # config
-        # livenessProbe:
-        #   initialDelaySeconds: 10
-        #   httpGet:
-        #     path: /healthz
-        #     port: 10259
-        #     scheme: HTTP
         lifecycle:
           preStop:
             exec:
               command: ["/root/ovnkube.sh", "cleanup-ovn-node"]
+        readinessProbe:
+          exec:
+            command: ["/usr/bin/ovn-kube-util", "readiness-probe", "-t", "ovnkube-node"]
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+          periodSeconds: 60
 
       nodeSelector:
         kubernetes.io/os: "linux"
@@ -222,5 +199,10 @@ spec:
       - name: host-slash
         hostPath:
           path: /
+      - name: host-config-openvswitch
+        hostPath:
+          path: /etc/origin/openvswitch
+      
+
       tolerations:
       - operator: "Exists"

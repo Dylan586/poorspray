@@ -1,3 +1,25 @@
+# service to expose the ovnkube-db pod
+apiVersion: v1
+kind: Service
+metadata:
+  name: ovnkube-db
+  namespace: ovn-kubernetes
+spec:
+  ports:
+  - name: north
+    port: 6641
+    protocol: TCP
+    targetPort: 6641
+  - name: south
+    port: 6642
+    protocol: TCP
+    targetPort: 6642
+  sessionAffinity: None
+  clusterIP: None
+  type: ClusterIP
+
+---
+
 # ovnkube-db
 # daemonset version 3
 # starts ovn NB/SB ovsdb daemons, each in a separate container
@@ -46,7 +68,7 @@ spec:
 
       # nb-ovsdb - v3
       - name: nb-ovsdb
-        image: "quay.io/nvidia/ovnkube-u:f9933f3775e0"
+        image: "quay.io/nvidia/ovnkube-u:f604eee0767e"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "nb-ovsdb"]
@@ -56,6 +78,7 @@ spec:
           capabilities:
             add: ["NET_ADMIN"]
 
+        terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         # ovn db is stored in the pod in /etc/openvswitch
         # (or in /etc/ovn if OVN from new repository is used)
@@ -68,6 +91,10 @@ spec:
           name: host-var-log-ovs
         - mountPath: /var/log/ovn/
           name: host-var-log-ovs
+        # for the iptables wrapper
+        - mountPath: /host
+          name: host-slash
+          readOnly: true
 
         resources:
           requests:
@@ -78,6 +105,8 @@ spec:
           value: "3"
         - name: OVN_LOG_NB
           value: "-vconsole:info -vfile:info"
+        - name: OVN_NORTHD_PROBE_INTERVAL
+          value: "50000"
         - name: K8S_APISERVER
           valueFrom:
             configMapKeyRef:
@@ -87,23 +116,17 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        ports:
-        - name: healthz
-          containerPort: 10256
-        # TODO: Temporarily disabled until we determine how to wait for clean default
-        # config
-        # livenessProbe:
-        #   initialDelaySeconds: 10
-        #   httpGet:
-        #     path: /healthz
-        #     port: 10256
-        #     scheme: HTTP
-        lifecycle:
+        readinessProbe:
+          exec:
+            command: ["/usr/bin/ovn-kube-util", "readiness-probe", "-t", "ovnnb-db"]
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+          periodSeconds: 60
       # end of container
 
       # sb-ovsdb - v3
       - name: sb-ovsdb
-        image: "quay.io/nvidia/ovnkube-u:f9933f3775e0"
+        image: "quay.io/nvidia/ovnkube-u:f604eee0767e"
         imagePullPolicy: "IfNotPresent"
 
         command: ["/root/ovnkube.sh", "sb-ovsdb"]
@@ -113,6 +136,7 @@ spec:
           capabilities:
             add: ["NET_ADMIN"]
 
+        terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         # ovn db is stored in the pod in /etc/openvswitch
         # (or in /etc/ovn if OVN from new repository is used)
@@ -125,6 +149,10 @@ spec:
           name: host-var-log-ovs
         - mountPath: /var/log/ovn/
           name: host-var-log-ovs
+        # for the iptables wrapper
+        - mountPath: /host
+          name: host-slash
+          readOnly: true
 
         resources:
           requests:
@@ -144,18 +172,13 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        ports:
-        - name: healthz
-          containerPort: 10255
-        # TODO: Temporarily disabled until we determine how to wait for clean default
-        # config
-        # livenessProbe:
-        #   initialDelaySeconds: 10
-        #   httpGet:
-        #     path: /healthz
-        #     port: 10255
-        #     scheme: HTTP
-        lifecycle:
+        readinessProbe:
+          exec:
+            command: ["/usr/bin/ovn-kube-util", "readiness-probe", "-t", "ovnsb-db"]
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+          periodSeconds: 60
+
       # end of container
 
       nodeSelector:
@@ -168,5 +191,8 @@ spec:
       - name: host-var-log-ovs
         hostPath:
           path: /var/log/openvswitch
+      - name: host-slash
+        hostPath:
+          path: /
       tolerations:
       - operator: "Exists"

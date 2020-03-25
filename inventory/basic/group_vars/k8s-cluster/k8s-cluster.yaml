@@ -18,6 +18,8 @@ sdn-test3_stream_range_start: 10.1.12.141
 sdn-test3_stream_range_end: 10.1.12.160
 rlab-net-srv-27_stream_range_start: 10.1.12.161
 rlab-net-srv-27_stream_range_end: 10.1.12.180
+rlab-net-12_stream_range_start: 10.1.12.161
+rlab-net-12_stream_range_end: 10.1.12.180
 
 #ovn_gateway_opts: "--gateway-interface=brenp175s0 --gateway-nexthop=10.50.55.1"
 ovn_gateway_opts: ""
@@ -42,8 +44,11 @@ kubernetes_version: 1.16.3-00
 ubuntu_nv_ovs_curl: curl -s https://2d0158bd54acb8195b4b8cc465e2ad839865f45dd45efcd5:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-12-0/script.deb.sh | bash
 #centos_nv_ovs_curl: curl -s https://dde5dee3fddef955ebe8f8b548882e19180dfe1d9386e46c:@packages.nvidia.com/install/repositories/sdn/centos8-2-12-0-1/script.rpm.sh | os=el dist=7  bash
 
-centos_nv_ovs_curl: curl -s https://235d694c9659322992cdb8268f5e3b5fb0c3e4e8fd833447:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-12-0-2/script.rpm.sh | bash
-ovs_version: 2.12.0-2
+#centos_nv_ovs_curl: curl -s https://235d694c9659322992cdb8268f5e3b5fb0c3e4e8fd833447:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-12-0-2/script.rpm.sh | bash
+#ovs_version: 2.12.0-2
+
+centos_nv_ovs_curl: curl -s https://942d3e2c9301dd8e766003519888ed2e785240aa09b457b4:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-13-3-1/script.rpm.sh | bash
+ovs_version: 2.13.0
 
 
 #centos_nv_ovs_curl: curl -s https://212c509f7a05c079d2fdc312ad7e1265c4666f4fb629a000:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-13-90-1/script.rpm.sh |  bash
