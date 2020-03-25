@@ -20,6 +20,16 @@
   args:
     warn: false
 
+- name: Install epel release
+  package:
+    name: epel-release
+    state: present
+
+- name: Install libjemalloc
+  package:
+    name: jemalloc
+    state: present
+
 
 - name: set nv ovs repo
   shell: "{{ centos_nv_ovs_curl }}"
