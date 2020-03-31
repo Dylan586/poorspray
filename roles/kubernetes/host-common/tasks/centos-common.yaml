@@ -8,18 +8,6 @@
     enabled: no
     name: firewalld
 
-- name: OVS Pre-task | install python-six | Download
-  get_url:
-    url:  https://rpmfind.net/linux/centos/7.7.1908/os/x86_64/Packages/python-six-1.9.0-2.el7.noarch.rpm
-    dest: /tmp
-    validate_certs: no
-  become: yes
-
-- name: OVS Pre-task | install python-six
-  shell: yum -y localinstall /tmp/python-six-1.9.0-2.el7.noarch.rpm
-  args:
-    warn: false
-
 - name: Install epel release
   package:
     name: epel-release
