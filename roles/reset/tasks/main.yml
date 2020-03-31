@@ -105,7 +105,7 @@
   package:
     name: "{{ item }}"
     state: absent
-  loop: [ 'openvswitch', 'kubeadm', 'kubelet', 'docker-ce' ]
+  loop: [ 'network-scripts-openvswitch', 'openvswitch', 'kubeadm', 'kubelet', 'docker-ce' ]
   ignore_errors: true
   tags: reset
 
