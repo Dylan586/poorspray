@@ -10,7 +10,7 @@
   run_once: true
 
 - name: Network | Download nv-k8s OVN yamls
-  shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/ovn/ubuntu/shared/{{ item }}
+  shell: curl  -o {{ playbook_dir }}/roles/kubernetes/network-plugin/templates/{{ item }} --resolve gitlab-master.nvidia.com:443:127.0.0.1 https://gitlab-master.nvidia.com/sdn/k8s-yaml/raw/{{ nv_k8s_yamls_version }}/ovn/centos/shared/{{ item }}
   with_items:
     - ovn-setup.yaml
     - ovnkube-db.yaml
