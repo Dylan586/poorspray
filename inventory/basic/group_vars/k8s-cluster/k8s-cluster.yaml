@@ -8,10 +8,10 @@ sriov_devices:
         #- {dev_name: enp175s0, num_vfs: 4}
   - {dev_name: "{{ game_server_sriov_stream_pf }}", num_vfs: 4}
 
-#node-09_stream_range_start: 10.1.12.121
-#node-09_stream_range_end: 10.1.12.140
-#node-12_stream_range_start: 10.1.12.141
-#node-12_stream_range_end: 10.1.12.160
+node-09_stream_range_start: 10.1.12.121
+node-09_stream_range_end: 10.1.12.140
+node-12_stream_range_start: 10.1.12.141
+node-12_stream_range_end: 10.1.12.160
 sdn-test2_stream_range_start: 10.1.12.121
 sdn-test2_stream_range_end: 10.1.12.140
 sdn-test3_stream_range_start: 10.1.12.141
