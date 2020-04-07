@@ -13,3 +13,9 @@
 
 - name: Install Kubevirt | apply kubvirt-config-map.yaml
   shell: kubectl create -f "{{ network_deploy_dir }}/kubvirt-config-map.yaml"
+
+- name: Install Kubevirt | Download virtctl
+  get_url:
+    url: "{{ virtctl_location }}"
+    dest: /usr/bin/virtctl
+    mode: '755'

@@ -41,6 +41,7 @@ network_deploy_dir: /root/k8snet-deploy
 docker_version: 3:18.09.1-3.el7
 kubernetes_version: 1.16.3-00
 kubevirt_version: v0.27.0
+virtctl_location: https://github.com/kubevirt/kubevirt/releases/download/v0.26.4/virtctl-v0.26.4-linux-amd64
 
 ubuntu_nv_ovs_curl: curl -s https://2d0158bd54acb8195b4b8cc465e2ad839865f45dd45efcd5:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-12-0/script.deb.sh | bash
 #centos_nv_ovs_curl: curl -s https://dde5dee3fddef955ebe8f8b548882e19180dfe1d9386e46c:@packages.nvidia.com/install/repositories/sdn/centos8-2-12-0-1/script.rpm.sh | os=el dist=7  bash
