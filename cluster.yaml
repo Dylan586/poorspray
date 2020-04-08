@@ -38,11 +38,11 @@
     - role: kubernetes/node
   tags: set-nodes
 
-- hosts: kube-master
-  gather_facts: false
-  roles: 
-    - role: kubernetes/install-kubevirt
-  tags: install-kubevirt
+#- hosts: kube-master
+  #gather_facts: false
+  #roles: 
+  #  - role: kubernetes/install-kubevirt
+  #tags: install-kubevirt
 
 - hosts: k8s-cluster
   gather_facts: false
