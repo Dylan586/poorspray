@@ -50,7 +50,8 @@ ubuntu_nv_ovs_curl: curl -s https://2d0158bd54acb8195b4b8cc465e2ad839865f45dd45e
 #ovs_version: 2.12.0-2
 
 centos_nv_ovs_curl: curl -s https://38a0484b1764796f6ac26ab0eb03336ee168ab7fb3ac03a9:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-13-0-1/script.rpm.sh | bash
-ovs_version: 2.13.0
+#ovs_version: -2.13.0
+ovs_version: 
 
 
 #centos_nv_ovs_curl: curl -s https://212c509f7a05c079d2fdc312ad7e1265c4666f4fb629a000:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-13-90-1/script.rpm.sh |  bash
