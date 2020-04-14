@@ -38,7 +38,7 @@ nv_k8s_yamls_version: devel
 network_deploy_dir: /root/k8snet-deploy
 
 
-docker_version: 3:18.09.7
+docker_version: 18.09.7
 kubernetes_version: 1.17.4-00
 kubevirt_version: v0.27.0
 virtctl_location: https://github.com/kubevirt/kubevirt/releases/download/v0.26.4/virtctl-v0.26.4-linux-amd64
