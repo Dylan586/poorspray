@@ -1,0 +1,8 @@
+---
+
+- hosts: all
+  roles:
+    - role: kubernetes/upgrade-ovs
+  tags: upovs
+
+

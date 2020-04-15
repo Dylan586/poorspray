@@ -1,0 +1,48 @@
+---
+# tasks file for roles/kubernetes/upgrade-ovs
+#
+
+
+#- name: Update OVS | find nv OVS repos
+#  find:
+#    paths: /etc/yum.repos.d
+#    patterns: sdn_nv-ovs*
+#  register: repos_to_delete
+
+#- name: Update OVS | clear repos
+#  file: 
+#    path: "{{ item.path }}"
+#    state: absent
+#  with_items: "{{ repos_to_delete.files }}"
+
+#curl -s https://6bae5606566b26d357c13137b70f0398fee21dee42e9ecdf:@packages.nvidia.com/install/repositories/sdn/nv-ovs-2-13-cicd/script.rpm.sh | sudo bash
+- name: set nv ovs repo
+  shell: "{{ centos_nv_ovs_curl }}"
+  args:
+    warn: false
+  tags: ovs1
+
+- name: Install OVS
+  package:
+    name: "{{ item }}"
+    state: present
+    allow_downgrade: yes
+  with_items: 
+    - openvswitch{{ ovs_version }}
+    - network-scripts-openvswitch{{ ovs_version }}
+  tags: ovs1
+
+#- name: install ovs | Download 
+#  shell: yumdownloader openvswitch 
+#  tags: ovs
+#
+#- name: install ovs | rpm
+#  shell: rpm -ivh --nodeps openvswitch-2.12.0-1.x86_64.rpm
+#  tags: ovs
+
+- name: run ovs
+  systemd:
+    state: restarted
+    name: openvswitch
+    enabled: yes
+  tags: ovs1
