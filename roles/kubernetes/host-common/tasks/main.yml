@@ -21,6 +21,28 @@
   import_tasks: centos-common.yaml
   when: ansible_distribution == "CentOS"
 
+- name: Host | Create the pem dir
+  file:
+    path: /etc/ovn
+    state: directory
+
+- name: Host | Copy pem files
+  copy:
+    src: "pem/{{ item }}"
+    dest: "/etc/ovn/{{ item }}"
+  with_items:
+    - ca-cert.pem
+    - ovncontroller-cert.pem
+    - ovncontroller-privkey.pem
+    - ovnnb-cert.pem
+    - ovnnb-privkey.pem
+    - ovnnorthd-cert.pem
+    - ovnnorthd-privkey.pem
+    - ovnsb-cert.pem
+    - ovnsb-privkey.pem
+  tags: pem
+
+
   #- name: get ovn-kube-util
   #shell: docker run --rm -v /usr/bin:/host/usr/bin -it quay.io/gmoodalbail/deliver-ovn-util:v0.1
 
