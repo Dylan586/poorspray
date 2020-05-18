@@ -49,11 +49,13 @@
   shell: echo 0 > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
   with_items: "{{ sriov_devices }}"
   when: is_kube_node
+  tags: ovs1
 
 - name: Network | Set SRIOV
   shell: echo {{ item.num_vfs }} > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
   with_items: "{{ sriov_devices }}"
   when: is_kube_node
+  tags: ovs1
 
 - name: Network | deploy Multus
   shell: kubectl apply -f {{ network_deploy_dir }}/{{ item }}
@@ -62,6 +64,7 @@
     - sriov-public-net-crd.yaml 
     - sriov-storage-net-crd.yaml 
     - sriov-stream-net-crd.yaml
+    - sriov-default-net-crd.yaml
   when: is_kube_master
 
 - name: Network | deploy ovn-k8s

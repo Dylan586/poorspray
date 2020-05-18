@@ -53,6 +53,7 @@
     - sriov-public-net-crd.yaml
     - sriov-storage-net-crd.yaml
     - sriov-stream-net-crd.yaml
+    - sriov-default-net-crd.yaml
     - ovn-setup.yaml
     - ovnkube-db.yaml
     - ovnkube-master.yaml

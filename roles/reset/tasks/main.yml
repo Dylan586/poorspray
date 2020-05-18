@@ -27,31 +27,31 @@
 
 
 
-- name: Reset | set ifcfg
-  template:
-    src: ifcfg.j2
-    dest: /etc/sysconfig/network-scripts/ifcfg-{{ ovn_encap_dev }}
-    force: yes
-
-- name: Reset | remove br ifcfg
-  file: 
-    path: /etc/sysconfig/network-scripts/ifcfg-br{{ ovn_encap_dev }}
-    state: absent
-
-- name: run network-scripts
-  systemd:
-    state: restarted
-    enabled: yes
-    name: network
-
-- name: Clean ovs bridges
-  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br && systemctl restart network
-  args:
-    warn: false
-  ignore_errors: true
-  tags: 
-  - ovs
-  - cleanup
+#- name: Reset | set ifcfg
+#  template:
+#    src: ifcfg.j2
+#    dest: /etc/sysconfig/network-scripts/ifcfg-{{ ovn_encap_dev }}
+#    force: yes
+#
+#- name: Reset | remove br ifcfg
+#  file: 
+#    path: /etc/sysconfig/network-scripts/ifcfg-br{{ ovn_encap_dev }}
+#    state: absent
+#
+#- name: run network-scripts
+#  systemd:
+#    state: restarted
+#    enabled: yes
+#    name: network
+#
+#- name: Clean ovs bridges
+#  shell: ovs-vsctl list-br | xargs -r -l ovs-vsctl del-br && systemctl restart network
+#  args:
+#    warn: false
+#  ignore_errors: true
+#  tags: 
+#  - ovs
+#  - cleanup
 
 
 - name: Clean ovn on master
@@ -62,21 +62,22 @@
     - absent
     - directory
 
-- name: Reset | Clean ovs old db
-  file:
-    state: "{{ item }}"
-    path: "/etc/openvswitch"
-  with_items:
-    - absent
-    - directory
-  tags: reset
+#- name: Reset | Clean ovs old db
+#  file:
+#    state: "{{ item }}"
+#    path: "/etc/openvswitch"
+#  with_items:
+#    - absent
+#    - directory
+#  tags: reset
 
 - name: reset | stop services
   systemd:
     state: stopped
     enabled: no
     name: "{{ item }}"
-  loop: [ 'openvswitch', 'docker', 'kubelet' ]
+#  loop: [ 'openvswitch', 'docker', 'kubelet' ]
+  loop: [ 'docker', 'kubelet' ]
   ignore_errors: true
 
 - name: Reset | clear repos files identify
@@ -101,11 +102,13 @@
   with_items: "{{ repos_to_delete.files }}"
   tags: d7
 
-- name: Reset | remove ovs, docker, kubernetes
+#- name: Reset | remove ovs, docker, kubernetes
+- name: Reset | remove docker, kubernetes
   package:
     name: "{{ item }}"
     state: absent
-  loop: [ 'network-scripts-openvswitch', 'openvswitch', 'kubeadm', 'kubelet', 'docker-ce' ]
+#  loop: [ 'network-scripts-openvswitch', 'openvswitch', 'kubeadm', 'kubelet', 'docker-ce' ]
+  loop: [ 'kubeadm', 'kubelet', 'docker-ce' ]
   ignore_errors: true
   tags: reset
 

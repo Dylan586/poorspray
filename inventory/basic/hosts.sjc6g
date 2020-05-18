@@ -1,0 +1,25 @@
+[all]
+#nd-sjc3a-c18-cpu-06    ansible_host=5.5.5.101
+#nd-sjc3a-c18-cpu-09    ansible_host=5.5.5.40
+#nd-sjc3a-c18-cpu-12    ansible_host=5.5.5.30
+
+k8s-master-121-vm       ansible_host=5.5.5.101 ovn_encap_ip=5.5.5.101 ovn_encap_dev=ens2 game_server_sriov_stream_pf=ens2
+k8s-node-07       ansible_host=5.5.5.40 ovn_encap_ip=5.5.5.40 ovn_encap_dev=ens2 game_server_sriov_stream_pf=ens2
+k8s-node-08       ansible_host=5.5.5.30 ovn_encap_ip=5.5.5.30 ovn_encap_dev=ens2 game_server_sriov_stream_pf=ens2
+
+
+[kube-master]
+k8s-master-121-vm
+
+[kube-node]
+k8s-node-07
+k8s-node-08
+
+[game-hosts]
+k8s-node-07
+k8s-node-08
+
+[k8s-cluster:children]
+kube-master
+kube-node
+
