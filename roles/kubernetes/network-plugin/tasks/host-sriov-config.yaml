@@ -15,5 +15,6 @@
     force: yes
   with_items:
     - 10-sriov_net.conf
+    - 10-sriov_default_net.conf
   when: is_game_host
 

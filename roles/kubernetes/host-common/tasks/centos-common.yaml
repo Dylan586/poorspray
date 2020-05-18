@@ -62,12 +62,14 @@
     dest: /etc/sysconfig/network-scripts/ifcfg-{{ ovn_encap_dev }}
     force: yes
   tags: foo1
+  tags: ovs1
 
 - name: Get bridge mac address
   slurp: 
     src: /sys/class/net/{{ ovn_encap_dev }}/address
   register: ovn_encap_dev_mac
   tags: foo1
+  tags: ovs1
 
 - name: Set br ifcfg
   vars:
@@ -77,11 +79,13 @@
     dest: /etc/sysconfig/network-scripts/ifcfg-br{{ ovn_encap_dev }}
     force: yes
   tags: foo1
+  tags: ovs1
 
 - name: run network-scripts
   systemd:
     state: restarted
     name: network
+  tags: ovs1
 
 - name: Remove swapfile from /etc/fstab
   mount:

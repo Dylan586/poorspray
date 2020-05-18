@@ -5,7 +5,7 @@ is_kube_node: "{{ inventory_hostname in groups['kube-node'] }}"
 is_game_host: "{{ inventory_hostname in groups['game-hosts'] }}"
 
 sriov_devices:
-        #- {dev_name: enp175s0, num_vfs: 4}
+        #- {dev_name: ens2, num_vfs: 4}
   - {dev_name: "{{ game_server_sriov_stream_pf }}", num_vfs: 4}
 
 node-09_stream_range_start: 10.1.12.121
@@ -20,17 +20,21 @@ rlab-net-srv-27_stream_range_start: 10.1.12.161
 rlab-net-srv-27_stream_range_end: 10.1.12.180
 rlab-net-12_stream_range_start: 10.1.12.161
 rlab-net-12_stream_range_end: 10.1.12.180
+k8s-node-07_stream_range_start: 10.1.12.121
+k8s-node-07_stream_range_end: 10.1.12.140
+k8s-node-08_stream_range_start: 10.1.12.141
+k8s-node-08_stream_range_end: 10.1.12.160
 
-#ovn_gateway_opts: "--gateway-interface=brenp175s0 --gateway-nexthop=10.50.55.1"
-ovn_gateway_opts: ""
+ovn_gateway_opts: "--gateway-interface=brens2 --gateway-nexthop=5.5.5.101"
+#ovn_gateway_opts: ""
 
 
 any_errors_fatal: true
 
-cluster_default_route: 10.8.48.1
-ovn_encap_ip_prefix: 22
+cluster_default_route: 5.5.5.101
+ovn_encap_ip_prefix: 24
 cluster_dns1: 8.8.8.8
-cluster_dns2: 103.247.36.36
+cluster_dns2: 208.67.222.222
 
 pods_network_cidr: 192.168.0.0/16
 cluster_service_cidr: 10.90.0.0/16
