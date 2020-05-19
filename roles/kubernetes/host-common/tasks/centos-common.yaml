@@ -12,11 +12,13 @@
   package:
     name: epel-release
     state: present
+  tag: ovs1
 
 - name: Install libjemalloc
   package:
     name: jemalloc
     state: present
+  tags: ovs1
 
 
 - name: set nv ovs repo
