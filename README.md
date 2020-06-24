@@ -23,3 +23,7 @@ Some variables can be set from the command line. For example:
  # ansible-playbook -i inventory/basic/hosts.sjc3 cluster.yaml --extra-vars '{"cluster_default_route":'10.0.0.1'}'
 
 
+
+ansible-playbook -i inventory/basic/hosts.Peter cluster.yaml --skip-tags="no-sriov, hostname"
+
+

@@ -6,6 +6,8 @@
 - name: Assign inventory name to hostnames
   hostname:
     name: "{{ inventory_hostname }}"
+  tags: 
+  - hostname
 
 - name: Add hostname resolv
   lineinfile:

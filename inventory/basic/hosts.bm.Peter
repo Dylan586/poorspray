@@ -1,0 +1,29 @@
+[all]
+#sdn-test2       ansible_host=10.8.51.53  ovn_encap_ip=10.8.51.53  ovn_encap_dev=eno1 game_server_sriov_stream_pf=ens1
+#sdn-test3       ansible_host=10.8.51.55  ovn_encap_ip=10.8.51.55  ovn_encap_dev=eno1 game_server_sriov_stream_pf=ens1
+master-vm-1      ansible_host=10.8.50.240  ovn_encap_ip=10.8.50.240  ovn_encap_dev=enp1s0
+rlab-dell-01     ansible_host=10.8.51.215  ovn_encap_ip=10.8.51.215  ovn_encap_dev=enp3s0
+rlab-dell-02     ansible_host=10.8.51.217  ovn_encap_ip=10.8.51.217  ovn_encap_dev=enp3s0
+rlab-dell-03     ansible_host=10.8.51.219  ovn_encap_ip=10.8.51.219  ovn_encap_dev=enp3s0
+
+
+
+[kube-master]
+master-vm-1
+
+[kube-node]
+rlab-dell-01
+rlab-dell-02
+rlab-dell-03
+
+[game-hosts]
+rlab-dell-01
+rlab-dell-02
+rlab-dell-03
+
+[k8s-cluster:children]
+kube-master
+kube-node
+
+
+

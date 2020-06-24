@@ -18,7 +18,9 @@
   with_items:
     - sriov-dp.yaml
   when: is_kube_master
-  tags: network-clean
+  tags: 
+  - network-clean
+  - no-sriov
 
 - name: Network | Cleanup | delete ovn-k8s
   shell: kubectl delete -f {{ network_deploy_dir }}/{{ item }}
@@ -49,11 +51,15 @@
   shell: echo 0 > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
   with_items: "{{ sriov_devices }}"
   when: is_kube_node
+  tags:
+  - no-sriov
 
 - name: Network | Set SRIOV
   shell: echo {{ item.num_vfs }} > /sys/class/net/{{ item.dev_name }}/device/sriov_numvfs
   with_items: "{{ sriov_devices }}"
   when: is_kube_node
+  tags:
+  - no-sriov
 
 - name: Network | deploy Multus
   shell: kubectl apply -f {{ network_deploy_dir }}/{{ item }}
@@ -78,22 +84,30 @@
     path: /etc/pcidp
     state: directory
   when: is_game_host
+  tags:
+  - no-sriov
 
 - name: Handle host sriov cni conf
   import_tasks: host-sriov-config.yaml
   tags: host-sriov-config
+  tags:
+  - no-sriov
 
 - name: Network | deploy sriov device plugin
   shell: kubectl apply -f {{ network_deploy_dir }}/{{ item }}
   with_items:
     - sriov-dp.yaml
   when: is_kube_master
+  tags:
+  - no-sriov
 
 - name: Network | deploy sriov CNI
   shell: kubectl apply -f {{ network_deploy_dir }}/{{ item }}
   with_items:
     - sriov-cni.yaml
   when: is_kube_master
+  tags:
+  - no-sriov
 
 # zero and set sriov vf num
 # apply multus
