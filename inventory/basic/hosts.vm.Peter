@@ -7,44 +7,110 @@
 #sdn-test2       ansible_host=10.8.51.53  ovn_encap_ip=10.8.51.53  ovn_encap_dev=eno1 game_server_sriov_stream_pf=ens1
 #sdn-test3       ansible_host=10.8.51.55  ovn_encap_ip=10.8.51.55  ovn_encap_dev=eno1 game_server_sriov_stream_pf=ens1
 master-vm-1        ansible_host=10.8.50.240  ovn_encap_ip=10.8.50.240  ovn_encap_dev=enp1s0
+rlab-dell1-vm-1     ansible_host=10.8.50.161  ovn_encap_ip=10.8.50.161  ovn_encap_dev=enp1s0
+rlab-dell1-vm-2     ansible_host=10.8.50.162  ovn_encap_ip=10.8.50.162  ovn_encap_dev=enp1s0
+rlab-dell1-vm-3     ansible_host=10.8.50.163  ovn_encap_ip=10.8.50.163  ovn_encap_dev=enp1s0
+rlab-dell1-vm-4     ansible_host=10.8.50.164  ovn_encap_ip=10.8.50.164  ovn_encap_dev=enp1s0
+rlab-dell1-vm-5     ansible_host=10.8.50.165  ovn_encap_ip=10.8.50.165  ovn_encap_dev=enp1s0
+rlab-dell1-vm-6     ansible_host=10.8.50.166  ovn_encap_ip=10.8.50.166  ovn_encap_dev=enp1s0
+rlab-dell1-vm-7     ansible_host=10.8.50.167  ovn_encap_ip=10.8.50.167  ovn_encap_dev=enp1s0
+rlab-dell1-vm-8     ansible_host=10.8.50.168  ovn_encap_ip=10.8.50.168  ovn_encap_dev=enp1s0
+rlab-dell1-vm-9     ansible_host=10.8.50.169  ovn_encap_ip=10.8.50.169  ovn_encap_dev=enp1s0
+rlab-dell1-vm-10    ansible_host=10.8.50.170  ovn_encap_ip=10.8.50.170  ovn_encap_dev=enp1s0
+
+rlab-dell2-vm-1     ansible_host=10.8.50.171  ovn_encap_ip=10.8.50.171  ovn_encap_dev=enp1s0
+rlab-dell2-vm-2     ansible_host=10.8.50.172  ovn_encap_ip=10.8.50.172  ovn_encap_dev=enp1s0
+rlab-dell2-vm-3     ansible_host=10.8.50.173  ovn_encap_ip=10.8.50.173  ovn_encap_dev=enp1s0
+rlab-dell2-vm-4     ansible_host=10.8.50.174  ovn_encap_ip=10.8.50.174  ovn_encap_dev=enp1s0
+rlab-dell2-vm-5     ansible_host=10.8.50.175  ovn_encap_ip=10.8.50.175  ovn_encap_dev=enp1s0
+rlab-dell2-vm-6     ansible_host=10.8.50.176  ovn_encap_ip=10.8.50.176  ovn_encap_dev=enp1s0
+rlab-dell2-vm-7     ansible_host=10.8.50.177  ovn_encap_ip=10.8.50.177  ovn_encap_dev=enp1s0
+rlab-dell2-vm-8     ansible_host=10.8.50.178  ovn_encap_ip=10.8.50.178  ovn_encap_dev=enp1s0
+rlab-dell2-vm-9     ansible_host=10.8.50.179  ovn_encap_ip=10.8.50.179  ovn_encap_dev=enp1s0
+rlab-dell2-vm-10    ansible_host=10.8.50.180  ovn_encap_ip=10.8.50.180  ovn_encap_dev=enp1s0
+
 rlab-dell3-vm-1     ansible_host=10.8.50.181  ovn_encap_ip=10.8.50.181  ovn_encap_dev=enp1s0
 rlab-dell3-vm-2     ansible_host=10.8.50.182  ovn_encap_ip=10.8.50.182  ovn_encap_dev=enp1s0
-#rlab-dell3-vm-3     ansible_host=10.8.50.183  ovn_encap_ip=10.8.50.183  ovn_encap_dev=enp1s0
-#rlab-dell3-vm-4     ansible_host=10.8.50.184  ovn_encap_ip=10.8.50.184  ovn_encap_dev=enp1s0
-#rlab-dell3-vm-5     ansible_host=10.8.50.185  ovn_encap_ip=10.8.50.185  ovn_encap_dev=enp1s0
-#rlab-dell3-vm-6     ansible_host=10.8.50.186  ovn_encap_ip=10.8.50.186  ovn_encap_dev=enp1s0
-#rlab-dell3-vm-7     ansible_host=10.8.50.187  ovn_encap_ip=10.8.50.187  ovn_encap_dev=enp1s0
-#rlab-dell3-vm-8     ansible_host=10.8.50.188  ovn_encap_ip=10.8.50.188  ovn_encap_dev=enp1s0
-#rlab-dell3-vm-9     ansible_host=10.8.50.189  ovn_encap_ip=10.8.50.189  ovn_encap_dev=enp1s0
-#rlab-dell3-vm-10    ansible_host=10.8.50.190  ovn_encap_ip=10.8.50.190  ovn_encap_dev=enp1s0
+rlab-dell3-vm-3     ansible_host=10.8.50.183  ovn_encap_ip=10.8.50.183  ovn_encap_dev=enp1s0
+rlab-dell3-vm-4     ansible_host=10.8.50.184  ovn_encap_ip=10.8.50.184  ovn_encap_dev=enp1s0
+rlab-dell3-vm-5     ansible_host=10.8.50.185  ovn_encap_ip=10.8.50.185  ovn_encap_dev=enp1s0
+rlab-dell3-vm-6     ansible_host=10.8.50.186  ovn_encap_ip=10.8.50.186  ovn_encap_dev=enp1s0
+rlab-dell3-vm-7     ansible_host=10.8.50.187  ovn_encap_ip=10.8.50.187  ovn_encap_dev=enp1s0
+rlab-dell3-vm-8     ansible_host=10.8.50.188  ovn_encap_ip=10.8.50.188  ovn_encap_dev=enp1s0
+rlab-dell3-vm-9     ansible_host=10.8.50.189  ovn_encap_ip=10.8.50.189  ovn_encap_dev=enp1s0
+rlab-dell3-vm-10    ansible_host=10.8.50.190  ovn_encap_ip=10.8.50.190  ovn_encap_dev=enp1s0
 
 
 [kube-master]
 master-vm-1
 
 [kube-node]
+rlab-dell1-vm-1
+rlab-dell1-vm-2
+rlab-dell1-vm-3
+rlab-dell1-vm-4
+rlab-dell1-vm-5
+rlab-dell1-vm-6
+rlab-dell1-vm-7
+rlab-dell1-vm-8
+rlab-dell1-vm-9
+rlab-dell1-vm-10
+
+rlab-dell2-vm-1
+rlab-dell2-vm-2
+rlab-dell2-vm-3
+rlab-dell2-vm-4
+rlab-dell2-vm-5
+rlab-dell2-vm-6
+rlab-dell2-vm-7
+rlab-dell2-vm-8
+rlab-dell2-vm-9
+rlab-dell2-vm-10
+
 rlab-dell3-vm-1
 rlab-dell3-vm-2
-#rlab-dell3-vm-3
-#rlab-dell3-vm-4
-#rlab-dell3-vm-5
-#rlab-dell3-vm-6
-#rlab-dell3-vm-7
-#rlab-dell3-vm-8
-#rlab-dell3-vm-9
-#rlab-dell3-vm-10
+rlab-dell3-vm-3
+rlab-dell3-vm-4
+rlab-dell3-vm-5
+rlab-dell3-vm-6
+rlab-dell3-vm-7
+rlab-dell3-vm-8
+rlab-dell3-vm-9
+rlab-dell3-vm-10
 
 [game-hosts]
+rlab-dell1-vm-1
+rlab-dell1-vm-2
+rlab-dell1-vm-3
+rlab-dell1-vm-4
+rlab-dell1-vm-5
+rlab-dell1-vm-6
+rlab-dell1-vm-7
+rlab-dell1-vm-8
+rlab-dell1-vm-9
+rlab-dell1-vm-10
+
+rlab-dell2-vm-1
+rlab-dell2-vm-2
+rlab-dell2-vm-3
+rlab-dell2-vm-4
+rlab-dell2-vm-5
+rlab-dell2-vm-6
+rlab-dell2-vm-7
+rlab-dell2-vm-8
+rlab-dell2-vm-9
+rlab-dell2-vm-10
+
 rlab-dell3-vm-1
 rlab-dell3-vm-2
-#rlab-dell3-vm-3
-#rlab-dell3-vm-4
-#rlab-dell3-vm-5
-#rlab-dell3-vm-6
-#rlab-dell3-vm-7
-#rlab-dell3-vm-8
-#rlab-dell3-vm-9
-#rlab-dell3-vm-10
+rlab-dell3-vm-3
+rlab-dell3-vm-4
+rlab-dell3-vm-5
+rlab-dell3-vm-6
+rlab-dell3-vm-7
+rlab-dell3-vm-8
+rlab-dell3-vm-9
+rlab-dell3-vm-10
 
 [k8s-cluster:children]
 kube-master
